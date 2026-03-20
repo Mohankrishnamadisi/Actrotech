@@ -11,8 +11,8 @@ const Pricing = () => {
     <section id="pricing" className="relative z-10 py-16 md:py-20 lg:py-28">
       <div className="container">
         <SectionTitle
-          title="Simple and Affordable Pricing"
-          paragraph="There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form."
+          title="Our Service Plans"
+          paragraph="Flexible engagement models designed to meet your business needs. Choose the plan that works best for your project requirements."
           center
           width="665px"
         />
@@ -59,43 +59,43 @@ const Pricing = () => {
 
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
           <PricingBox
-            packageName="Lite"
-            price={isMonthly ? "40" : "120"}
+            packageName="Basic Engagement"
+            price={isMonthly ? "4999" : "49990"}
             duration={isMonthly ? "mo" : "yr"}
-            subtitle="Lorem ipsum dolor sit amet adiscing elit Mauris egestas enim."
+            subtitle="Perfect for small project support and dedicated developer engagement."
           >
-            <OfferList text="All UI Components" status="active" />
-            <OfferList text="Use with Unlimited Projects" status="active" />
-            <OfferList text="Commercial Use" status="active" />
+            <OfferList text="Small Project Support" status="active" />
+            <OfferList text="Dedicated Developer" status="active" />
             <OfferList text="Email Support" status="active" />
-            <OfferList text="Lifetime Access" status="inactive" />
-            <OfferList text="Free Lifetime Updates" status="inactive" />
+            <OfferList text="Monthly Reports" status="active" />
+            <OfferList text="Team Collaboration" status="inactive" />
+            <OfferList text="24/7 Support" status="inactive" />
           </PricingBox>
           <PricingBox
-            packageName="Basic"
-            price={isMonthly ? "399" : "789"}
+            packageName="Professional Engagement"
+            price={isMonthly ? "14999" : "149990"}
             duration={isMonthly ? "mo" : "yr"}
-            subtitle="Lorem ipsum dolor sit amet adiscing elit Mauris egestas enim."
+            subtitle="Ideal for full project development with team collaboration."
           >
-            <OfferList text="All UI Components" status="active" />
-            <OfferList text="Use with Unlimited Projects" status="active" />
-            <OfferList text="Commercial Use" status="active" />
-            <OfferList text="Email Support" status="active" />
-            <OfferList text="Lifetime Access" status="active" />
-            <OfferList text="Free Lifetime Updates" status="inactive" />
+            <OfferList text="Full Project Development" status="active" />
+            <OfferList text="Dedicated Team (2-3 members)" status="active" />
+            <OfferList text="Priority Support" status="active" />
+            <OfferList text="Bi-weekly Reports" status="active" />
+            <OfferList text="Team Collaboration" status="active" />
+            <OfferList text="24/7 Support" status="inactive" />
           </PricingBox>
           <PricingBox
-            packageName="Plus"
-            price={isMonthly ? "589" : "999"}
+            packageName="Enterprise Solutions"
+            price={isMonthly ? "29999" : "299990"}
             duration={isMonthly ? "mo" : "yr"}
-            subtitle="Lorem ipsum dolor sit amet adiscing elit Mauris egestas enim."
+            subtitle="Complete end-to-end development with dedicated team and 24/7 support."
           >
-            <OfferList text="All UI Components" status="active" />
-            <OfferList text="Use with Unlimited Projects" status="active" />
-            <OfferList text="Commercial Use" status="active" />
-            <OfferList text="Email Support" status="active" />
-            <OfferList text="Lifetime Access" status="active" />
-            <OfferList text="Free Lifetime Updates" status="active" />
+            <OfferList text="End-to-End Development" status="active" />
+            <OfferList text="Dedicated Team (4+ members)" status="active" />
+            <OfferList text="24/7 Support & Maintenance" status="active" />
+            <OfferList text="Weekly Strategy Meetings" status="active" />
+            <OfferList text="Custom Solutions" status="active" />
+            <OfferList text="Project Ownership" status="active" />
           </PricingBox>
         </div>
       </div>

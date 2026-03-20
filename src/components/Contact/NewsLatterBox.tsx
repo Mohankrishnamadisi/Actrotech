@@ -8,11 +8,10 @@ const NewsLatterBox = () => {
   return (
     <div className="shadow-three dark:bg-gray-dark relative z-10 rounded-xs bg-white p-8 sm:p-11 lg:p-8 xl:p-11">
       <h3 className="mb-4 text-2xl leading-tight font-bold text-black dark:text-white">
-        Subscribe to receive future updates
+        Subscribe for Updates
       </h3>
       <p className="border-body-color/25 text-body-color mb-11 border-b pb-11 text-base leading-relaxed dark:border-white/25">
-        Lorem ipsum dolor sited Sed ullam corper consectur adipiscing Mae ornare
-        massa quis lectus.
+        Stay updated with the latest trends in software development, technology insights, and staffing opportunities.
       </p>
       <div>
         <input
@@ -30,10 +29,10 @@ const NewsLatterBox = () => {
         <input
           type="submit"
           value="Subscribe"
-          className="bg-primary shadow-submit hover:bg-primary/90 dark:shadow-submit-dark mb-5 flex w-full cursor-pointer items-center justify-center rounded-xs px-9 py-4 text-base font-medium text-white duration-300"
+          className="bg-primary mb-5 flex w-full cursor-pointer items-center justify-center rounded-lg px-9 py-4 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0"
         />
         <p className="text-body-color dark:text-body-color-dark text-center text-base leading-relaxed">
-          No spam guaranteed, So please don’t send any spam mail.
+          No spam guaranteed. Only valuable insights and industry updates.
         </p>
       </div>
 

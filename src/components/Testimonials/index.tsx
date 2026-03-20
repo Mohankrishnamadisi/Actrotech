@@ -5,28 +5,28 @@ import SingleTestimonial from "./SingleTestimonial";
 const testimonialData: Testimonial[] = [
   {
     id: 1,
-    name: "Musharof Chy",
-    designation: "Founder @TailGrids",
+    name: "John Smith",
+    designation: "CTO, Tech Startup USA",
     content:
-      "Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community.",
+      "Actrotech delivered exactly what we needed. Their team is highly professional and responsive. The quality of work exceeded our expectations.",
     image: "/images/testimonials/auth-01.png",
     star: 5,
   },
   {
     id: 2,
-    name: "Devid Weilium",
-    designation: "Founder @UIdeck",
+    name: "Rahul Sharma",
+    designation: "Tech Manager, Global Enterprise",
     content:
-      "Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community.",
+      "Their developers integrated seamlessly with our team. Highly recommended for staffing services. They understand our business requirements perfectly.",
     image: "/images/testimonials/auth-02.png",
     star: 5,
   },
   {
     id: 3,
-    name: "Lethium Frenci",
-    designation: "Founder @Lineicons",
+    name: "Amit Kumar",
+    designation: "Product Owner, SaaS Company",
     content:
-      "Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community.",
+      "Excellent project delivery and communication. They truly understand business requirements and deliver solutions that drive real value.",
     image: "/images/testimonials/auth-03.png",
     star: 5,
   },
@@ -37,8 +37,8 @@ const Testimonials = () => {
     <section className="dark:bg-bg-color-dark bg-gray-light relative z-10 py-16 md:py-20 lg:py-28">
       <div className="container">
         <SectionTitle
-          title="What Our Users Says"
-          paragraph="There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form."
+          title="What Our Clients Say"
+          paragraph="Client satisfaction drives our success. Here's what industry leaders think about our services and expertise."
           center
         />
 

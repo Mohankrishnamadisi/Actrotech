@@ -3,42 +3,42 @@ import { Blog } from "@/types/blog";
 const blogData: Blog[] = [
   {
     id: 1,
-    title: "Best UI components for modern websites",
+    title: "Web Development Trends for 2025",
     paragraph:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet dictum neque, laoreet dolor.",
+      "Explore the latest trends in web development including AI integration, advanced frameworks, and performance optimization techniques.",
     image: "/images/blog/blog-01.jpg",
     author: {
-      name: "Samuyl Joshi",
+      name: "Actrotech Team",
       image: "/images/blog/author-03.png",
-      designation: "Graphic Designer",
+      designation: "Software Expert",
     },
-    tags: ["creative"],
+    tags: ["development"],
     publishDate: "2025",
   },
   {
     id: 2,
-    title: "9 simple ways to improve your design skills",
+    title: "How to Hire Remote Developers Effectively",
     paragraph:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet dictum neque, laoreet dolor.",
+      "Best practices for hiring and managing remote development teams globally. Learn how to build high-performing distributed teams.",
     image: "/images/blog/blog-02.jpg",
     author: {
-      name: "Musharof Chy",
+      name: "Actrotech Team",
       image: "/images/blog/author-02.png",
-      designation: "Content Writer",
+      designation: "HR Specialist",
     },
-    tags: ["computer"],
+    tags: ["staffing"],
     publishDate: "2025",
   },
   {
     id: 3,
-    title: "Tips to quickly improve your coding speed.",
+    title: "UI/UX Best Practices for Modern Applications",
     paragraph:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet dictum neque, laoreet dolor.",
+      "Design principles that enhance user experience and engagement. Create intuitive interfaces that users love with proven UX strategies.",
     image: "/images/blog/blog-03.jpg",
     author: {
-      name: "Lethium Deo",
+      name: "Actrotech Team",
       image: "/images/blog/author-03.png",
-      designation: "Graphic Designer",
+      designation: "Design Lead",
     },
     tags: ["design"],
     publishDate: "2025",

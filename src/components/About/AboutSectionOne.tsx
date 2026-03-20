@@ -24,8 +24,8 @@ const AboutSectionOne = () => {
           <div className="-mx-4 flex flex-wrap items-center">
             <div className="w-full px-4 lg:w-1/2">
               <SectionTitle
-                title="About Actrotech - Your Software Innovation Partner"
-                paragraph="At Actrotech, we specialize in delivering cutting-edge software solutions that drive business growth. Our team of experts focuses on creating scalable, secure, and efficient applications tailored to your needs."
+                title="About Actrotech – Your Technology Partner"
+                paragraph="Actrotech Tech Solutions Pvt Ltd is a trusted IT partner delivering high-quality software solutions and staffing services to global clients. We specialize in custom software development, product engineering, cloud solutions, IT staffing, and third-party vendor services."
                 mb="44px"
               />
 
@@ -41,8 +41,8 @@ const AboutSectionOne = () => {
                   </div>
 
                   <div className="w-full px-3 sm:w-1/2 lg:w-full xl:w-1/2">
-                    <List text="AI & Machine Learning" />
-                    <List text="Mobile App Development" />
+                    <List text="Product Engineering" />
+                    <List text="IT Staffing Services" />
                     <List text="24/7 Support" />
                   </div>
                 </div>

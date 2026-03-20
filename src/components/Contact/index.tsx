@@ -12,10 +12,10 @@ const Contact = () => {
               "
             >
               <h2 className="mb-3 text-2xl font-bold text-black dark:text-white sm:text-3xl lg:text-2xl xl:text-3xl">
-                Need Help? Open a Ticket
+                Need Help? Get in Touch
               </h2>
               <p className="mb-12 text-base font-medium text-body-color">
-                Our support team will get back to you ASAP via email.
+                Our team is ready to assist you with your requirements. Fill out the form below and we'll get back to you within 24 hours.
               </p>
               <form>
                 <div className="-mx-4 flex flex-wrap">
@@ -66,8 +66,8 @@ const Contact = () => {
                     </div>
                   </div>
                   <div className="w-full px-4">
-                    <button className="rounded-xs bg-primary px-9 py-4 text-base font-medium text-white shadow-submit duration-300 hover:bg-primary/90 dark:shadow-submit-dark">
-                      Submit Ticket
+                    <button className="rounded-lg bg-gradient-to-r from-primary to-primary/80 px-9 py-4 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0">
+                      Submit Request
                     </button>
                   </div>
                 </div>
