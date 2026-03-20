@@ -1,8 +1,18 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 
 const Footer = () => {
+  const { theme } = useTheme();
+
+  const logoStyle = {
+    filter:
+      theme === "light"
+        ? "invert(24%) sepia(90%) saturate(3000%) hue-rotate(181deg) brightness(95%) contrast(90%)"
+        : "none",
+  };
+
   return (
     <>
       <footer className="relative z-10 bg-white pt-16 dark:bg-gray-dark md:pt-20 lg:pt-24">
@@ -14,16 +24,10 @@ const Footer = () => {
                   <Image
                     src="/Actro_logo.png"
                     alt="Actrotech logo"
-                    className="w-full dark:hidden"
+                    className="w-full"
                     width={140}
                     height={30}
-                  />
-                  <Image
-                    src="/Actro_logo.png"
-                    alt="Actrotech logo"
-                    className="hidden w-full dark:block"
-                    width={140}
-                    height={30}
+                    style={logoStyle}
                   />
                 </Link>
                 <p className="mb-9 text-base leading-relaxed text-body-color dark:text-body-color-dark">

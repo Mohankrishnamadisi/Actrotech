@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
 
@@ -26,6 +27,8 @@ const Header = () => {
     window.addEventListener("scroll", handleStickyNavbar);
   });
 
+  const { theme } = useTheme();
+
   // submenu handler
   const [openIndex, setOpenIndex] = useState(-1);
   const handleSubmenu = (index) => {
@@ -34,6 +37,13 @@ const Header = () => {
     } else {
       setOpenIndex(index);
     }
+  };
+
+  const logoStyle = {
+    filter:
+      theme === "light"
+        ? "invert(24%) sepia(90%) saturate(3000%) hue-rotate(181deg) brightness(95%) contrast(90%)"
+        : "none",
   };
 
   const usePathName = usePathname();
@@ -61,14 +71,8 @@ const Header = () => {
                   alt="Actrotech logo"
                   width={140}
                   height={30}
-                  className="w-full dark:hidden"
-                />
-                <Image
-                  src="/Actro_logo.png"
-                  alt="Actrotech logo"
-                  width={140}
-                  height={30}
-                  className="hidden w-full dark:block"
+                  className="w-full"
+                  style={logoStyle}
                 />
               </Link>
             </div>
