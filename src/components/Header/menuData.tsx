@@ -33,31 +33,31 @@ const menuData: Menu[] = [
       {
         id: 41,
         title: "UI Development",
-        path: "/about",
+        path: "/ui-development",
         newTab: false,
       },
       {
         id: 42,
         title: "Web Application Development",
-        path: "/contact",
+        path: "/web-application-development",
         newTab: false,
       },
       {
         id: 45,
         title: "API Development",
-        path: "/blog-details",
+        path: "/api-development",
         newTab: false,
       },
       {
         id: 46,
         title: "Backend Services",
-        path: "/signin",
+        path: "/backend-services",
         newTab: false,
       },
       {
         id: 47,
         title: "Maintenance & Support",
-        path: "/signup",
+        path: "/maintenance-support",
         newTab: false,
       },
       {
