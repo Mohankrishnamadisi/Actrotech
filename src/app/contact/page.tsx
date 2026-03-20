@@ -14,7 +14,7 @@ const ContactPage = () => {
     <>
       <Breadcrumb
         pageName="Contact Page"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius eros eget sapien consectetur ultrices. Ut quis dapibus libero."
+        description="At ActroTech, we deliver innovative and reliable software solutions tailored to your business needs. Our team is here to support your projects, ideas, and collaboration goals."
       />
 
       <Contact />

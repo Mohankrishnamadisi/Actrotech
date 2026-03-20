@@ -15,7 +15,7 @@ const AboutPage = () => {
     <>
       <Breadcrumb
         pageName="About Page"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius eros eget sapien consectetur ultrices. Ut quis dapibus libero."
+        description="At ActroTech, we deliver innovative and scalable software solutions tailored to modern business needs. Our team focuses on building high-quality applications that drive efficiency, growth, and digital transformation."
       />
       <AboutSectionOne />
       <AboutSectionTwo />

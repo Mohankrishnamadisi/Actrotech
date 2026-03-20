@@ -145,88 +145,109 @@ const whyChoose = [
 export default function APIDevelopmentPage() {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
-  const apiImage = isDark ? '/images/new/ui-dark.png' : '/images/new/ui-light.png';
+  const apiImage = isDark ? '/images/new/api-dark.png' : '/images/new/api-light.png';
   const previewImage1 = isDark ? '/images/new/ui-preview-dark.png' : '/images/new/ui-preview-light.png';
   const previewImage2 = isDark ? '/images/new/ui-preview-light.png' : '/images/new/ui-preview-dark.png';
 
   return (
     <div className={`mt-8 min-h-screen ${isDark ? 'bg-[#0B1120] text-white' : 'bg-white text-gray-900'}`}>
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 py-16 lg:py-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-              API Development Services
-            </h1>
-            <p className="text-lg lg:text-xl mb-4 text-gray-600 dark:text-gray-300">
-              We build secure, scalable, and high-performance APIs that power modern applications and integrations.
-            </p>
-            <p className="text-base mb-8 text-gray-600 dark:text-gray-300">
-              From RESTful APIs to microservices architecture, we design robust backend communication layers that ensure seamless data exchange between systems.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center gap-2">
-                Start Your Project <ArrowRight size={20} />
-              </button>
-              <button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors">
-                Contact Us
-              </button>
+      {/* Hero Section - Code-Focused Layout */}
+      <section className="bg-gray-900 text-white py-16 lg:py-24">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="mb-6">
+                <span className="inline-block bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium mb-4">
+                  API Development
+                </span>
+                <h1 className="mb-4 text-3xl font-bold leading-tight! text-white sm:text-4xl md:text-[45px]">
+                  Build Powerful APIs
+                </h1>
+                <p className="text-base leading-relaxed! text-gray-300 md:text-lg mb-4">
+                  We build secure, scalable, and high-performance APIs that power modern applications and integrations.
+                </p>
+                <p className="text-base leading-relaxed! text-gray-300 md:text-lg mb-8">
+                  From RESTful APIs to microservices architecture, we design robust backend communication layers that ensure seamless data exchange between systems.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center gap-2">
+                    Start Your Project <ArrowRight size={20} />
+                  </button>
+                  <button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                    Contact Us
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="flex justify-center">
-            <Image
-              src={apiImage}
-              alt="API Development"
-              width={500}
-              height={400}
-              className="w-full max-w-md"
-            />
+            <div className="flex justify-center">
+              <div className={`p-8 rounded-lg ${isDark ? 'bg-gray-800' : 'bg-gray-100'} font-mono text-sm shadow-lg`}>
+                <div className="text-green-400 mb-2">// API Endpoint Example</div>
+                <div className="text-blue-400">GET /api/users</div>
+                <div className="text-gray-400 ml-4">Authorization: Bearer token</div>
+                <div className="text-gray-400 ml-4">Content-Type: application/json</div>
+                <div className="text-green-400 mt-4 mb-2">// Response</div>
+                <div className="text-yellow-400">{'{'} "status": "success", "data": [...] {'}'}</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* What We Offer */}
+      {/* What We Offer - Technical Cards */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">What We Offer</h2>
+        <h2 className="mb-12 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">What We Offer</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {whatWeOffer.map((offer, idx) => {
             const Icon = offer.icon;
             return (
               <div
                 key={idx}
-                className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${
+                className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border-l-4 border-blue-600 ${
                   isDark ? 'bg-gray-800' : 'bg-white border'
                 }`}
               >
-                <Icon size={48} className="text-blue-600 mb-4" />
-                <h3 className="text-xl font-semibold mb-3">{offer.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{offer.description}</p>
+                <div className="flex items-center mb-4">
+                  <Icon size={32} className="text-blue-600 mr-3" />
+                  <h3 className="text-lg font-semibold">{offer.title}</h3>
+                </div>
+                <p className="text-gray-600 dark:text-gray-300 mb-4">{offer.description}</p>
+                <div className={`p-3 rounded ${isDark ? 'bg-gray-700' : 'bg-gray-50'} font-mono text-xs text-gray-600 dark:text-gray-400`}>
+                  {idx === 0 && 'GET /api/resources'}
+                  {idx === 1 && 'POST /api/services'}
+                  {idx === 2 && 'PUT /api/integrations'}
+                  {idx === 3 && 'PATCH /api/legacy'}
+                  {idx === 4 && 'WS /api/realtime'}
+                </div>
               </div>
             );
           })}
         </div>
       </section>
 
-      {/* Technologies */}
-      <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Technologies We Use</h2>
-        <div className="flex flex-wrap justify-center gap-4">
-          {technologies.map((tech, idx) => (
-            <span
-              key={idx}
-              className={`px-4 py-2 rounded-full text-sm font-medium ${
-                isDark ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-900'
-              }`}
-            >
-              {tech}
-            </span>
-          ))}
+      {/* Technologies - Code Blocks */}
+      <section className="bg-gray-50 dark:bg-gray-900 py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="mb-12 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Technologies & Tools</h2>
+          <div className="max-w-4xl mx-auto">
+            <div className={`p-6 rounded-lg ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-lg font-mono text-sm`}>
+              <div className="text-green-400 mb-4">// Our Tech Stack</div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {technologies.map((tech, idx) => (
+                  <div key={idx} className="text-center">
+                    <div className={`px-3 py-2 rounded ${isDark ? 'bg-gray-700' : 'bg-gray-100'} text-blue-400 hover:bg-blue-600 hover:text-white transition-colors cursor-pointer`}>
+                      {tech}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Key Features */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Key Features of Our APIs</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Key Features of Our APIs</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {keyFeatures.map((feature, idx) => (
             <div key={idx} className="flex items-center gap-3">
@@ -239,7 +260,7 @@ export default function APIDevelopmentPage() {
 
       {/* Process */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Our API Development Process</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Our API Development Process</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {process.map((step) => {
             const Icon = step.icon;
@@ -266,7 +287,7 @@ export default function APIDevelopmentPage() {
 
       {/* Use Cases */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">API Use Cases</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">API Use Cases</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {useCases.map((useCase, idx) => {
             const Icon = useCase.icon;
@@ -282,7 +303,7 @@ export default function APIDevelopmentPage() {
 
       {/* Showcase */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">API in Action</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">API in Action</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow">
             <Image
@@ -307,7 +328,7 @@ export default function APIDevelopmentPage() {
 
       {/* Why Choose */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Why Choose ActroTech</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Why Choose ActroTech</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {whyChoose.map((item, idx) => {
             const Icon = item.icon;
@@ -322,9 +343,9 @@ export default function APIDevelopmentPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
+      <section className="bg-linear-to-r from-blue-600 to-purple-600 text-white py-16">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-6">Build Powerful APIs with ActroTech</h2>
+          <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px]">Build Powerful APIs with ActroTech</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
               Get Started

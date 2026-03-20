@@ -118,14 +118,23 @@ export default function UIDevelopmentPage() {
 
   return (
     <div className={`mt-8 min-h-screen ${isDark ? 'bg-[#0B1120] text-white' : 'bg-white text-gray-900'}`}>
-      {/* Hero Section */}
+      {/* Hero Section - Image Left Layout */}
       <section className="container mx-auto px-4 py-16 lg:py-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6">
+          <div className="flex justify-center order-2 lg:order-1">
+            <Image
+              src={uiImage}
+              alt="UI Development"
+              width={500}
+              height={400}
+              className="w-full max-w-md rounded-lg shadow-lg"
+            />
+          </div>
+          <div className="order-1 lg:order-2">
+            <h1 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px]">
               UI Development Services
             </h1>
-            <p className="text-lg lg:text-xl mb-8 text-gray-600 dark:text-gray-300">
+            <p className="text-base leading-relaxed! text-body-color md:text-lg mb-8">
               We design and build modern, responsive, and high-performance user interfaces that deliver exceptional user experiences.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -137,43 +146,43 @@ export default function UIDevelopmentPage() {
               </button>
             </div>
           </div>
-          <div className="flex justify-center">
-            <Image
-              src={uiImage}
-              alt="UI Development"
-              width={500}
-              height={400}
-              className="w-full max-w-md"
-            />
-          </div>
         </div>
       </section>
 
-      {/* What We Offer */}
-      <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">What We Offer</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {whatWeOffer.map((offer, idx) => {
-            const Icon = offer.icon;
-            return (
-              <div
-                key={idx}
-                className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${
-                  isDark ? 'bg-gray-800' : 'bg-white border'
-                }`}
-              >
-                <Icon size={48} className="text-blue-600 mb-4" />
-                <h3 className="text-xl font-semibold mb-3">{offer.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{offer.description}</p>
-              </div>
-            );
-          })}
+      {/* What We Offer - Timeline Style */}
+      <section className="bg-gray-50 dark:bg-gray-900 py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="mb-12 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">What We Offer</h2>
+          <div className="max-w-4xl mx-auto">
+            {whatWeOffer.map((offer, idx) => {
+              const Icon = offer.icon;
+              const isEven = idx % 2 === 0;
+              return (
+                <div key={idx} className={`flex items-center gap-8 mb-12 ${isEven ? '' : 'flex-row-reverse'}`}>
+                  <div className={`flex-1 ${isEven ? 'text-right' : 'text-left'}`}>
+                    <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-lg mb-4 ${isEven ? 'ml-auto' : 'mr-auto'}`}>
+                      <Icon size={32} className="text-blue-600" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-3">{offer.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-lg">{offer.description}</p>
+                  </div>
+                  <div className="shrink-0">
+                    <div className="w-4 h-4 bg-blue-600 rounded-full"></div>
+                    {idx < whatWeOffer.length - 1 && (
+                      <div className="w-0.5 h-16 bg-blue-600 mx-auto mt-4"></div>
+                    )}
+                  </div>
+                  <div className="flex-1"></div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
       {/* Technologies */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Technologies & Tools</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Technologies & Tools</h2>
         <div className="flex flex-wrap justify-center gap-4">
           {technologies.map((tech, idx) => (
             <span
@@ -188,49 +197,57 @@ export default function UIDevelopmentPage() {
         </div>
       </section>
 
-      {/* Process */}
+      {/* Process - Horizontal Timeline */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Our UI Development Process</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {process.map((step) => {
-            const Icon = step.icon;
-            return (
-              <div
-                key={step.step}
-                className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${
-                  isDark ? 'bg-gray-800' : 'bg-white border'
-                }`}
-              >
-                <div className="flex items-center mb-4">
-                  <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3">
-                    {step.step}
+        <h2 className="mb-12 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Our UI Development Process</h2>
+        <div className="relative">
+          {/* Timeline line */}
+          <div className="absolute top-24 left-0 right-0 h-0.5 bg-blue-600 hidden lg:block"></div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-6 gap-8">
+            {process.map((step) => {
+              const Icon = step.icon;
+              return (
+                <div key={step.step} className="text-center relative">
+                  <div className="flex flex-col items-center">
+                    <div className="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold mb-4 relative z-10">
+                      {step.step}
+                    </div>
+                    <div className={`w-16 h-16 rounded-full ${isDark ? 'bg-gray-800' : 'bg-white'} flex items-center justify-center shadow-lg mb-4`}>
+                      <Icon size={32} className="text-blue-600" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">{step.description}</p>
                   </div>
-                  <Icon size={32} className="text-blue-600" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{step.description}</p>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </section>
 
-      {/* Key Features */}
-      <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Key Features</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {keyFeatures.map((feature, idx) => (
-            <div key={idx} className="flex items-center gap-3">
-              <CheckCircle size={24} className="text-green-600" />
-              <span className="text-lg">{feature}</span>
+      {/* Key Features - Circular Layout */}
+      <section className="bg-gray-50 dark:bg-gray-900 py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="mb-12 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Key Features</h2>
+          <div className="flex justify-center">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-8 max-w-4xl">
+              {keyFeatures.map((feature, idx) => (
+                <div key={idx} className="text-center group">
+                  <div className={`w-24 h-24 mx-auto mb-4 rounded-full ${isDark ? 'bg-gray-800' : 'bg-white'} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110`}>
+                    <CheckCircle size={32} className="text-green-600" />
+                  </div>
+                  <p className="text-lg font-medium">{feature}</p>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </section>
 
       {/* Why Choose */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Why Choose ActroTech?</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Why Choose ActroTech?</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {whyChoose.map((item, idx) => {
             const Icon = item.icon;
@@ -246,7 +263,7 @@ export default function UIDevelopmentPage() {
 
       {/* Showcase */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">UI Showcase</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">UI Showcase</h2>
         <div className="flex justify-center">
           <Image
             src={isDark ? '/images/new/ui-preview-dark.png' : '/images/new/ui-preview-light.png'}
@@ -259,9 +276,9 @@ export default function UIDevelopmentPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
+      <section className="bg-linear-to-r from-blue-600 to-purple-600 text-white py-16">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-6">Let's Build Stunning User Interfaces Together</h2>
+          <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px]">Let's Build Stunning User Interfaces Together</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
               Start Your Project

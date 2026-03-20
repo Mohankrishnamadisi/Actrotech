@@ -14,8 +14,8 @@ const Blog = () => {
   return (
     <>
       <Breadcrumb
-        pageName="Blog Grid"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius eros eget sapien consectetur ultrices. Ut quis dapibus libero."
+        pageName="Our Blog"
+        description="Explore our latest insights, trends, and expert perspectives on software development and technology. Stay updated with valuable knowledge, tips, and innovations from the ActroTech team."
       />
 
       <section className="pt-[120px] pb-[120px]">

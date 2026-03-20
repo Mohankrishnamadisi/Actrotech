@@ -60,12 +60,18 @@ const menuData: Menu[] = [
         path: "/maintenance-support",
         newTab: false,
       },
-      {
-        id: 48,
-        title: "Error Page",
-        path: "/error",
+       {
+        id: 47,
+        title: "US Staffing",
+        path: "/us-staffing",
         newTab: false,
       },
+      // {
+      //   id: 48,
+      //   title: "Error Page",
+      //   path: "/error",
+      //   newTab: false,
+      // },
     ],
   },
   {
@@ -77,7 +83,7 @@ const menuData: Menu[] = [
   {
     id: 33,
     title: "Careers",
-    path: "/blog",
+    path: "/careers",
     newTab: false,
   },
   {

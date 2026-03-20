@@ -69,97 +69,132 @@ export default function ProductsPage() {
 
   return (
     <div className={`mt-8 min-h-screen ${isDark ? 'bg-[#0B1120] text-white' : 'bg-white text-gray-900'}`}>
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 py-16 lg:py-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h1 className="text-4xl lg:text-6xl font-bold mb-2">
-              Our Products & Solutions
-            </h1>
-            <p className="text-lg lg:text-xl mb-8 text-gray-600 dark:text-gray-300">
-              Innovative software solutions designed to accelerate business growth and digital transformation.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center gap-2">
-                Explore Products <ArrowRight size={20} />
-              </button>
-              <button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors">
-                Contact Us
-              </button>
-            </div>
+      {/* Hero Section - Centered Layout */}
+      <section className="container mx-auto px-4 py-16 lg:py-24 text-center">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px]">
+            Our Products & Solutions
+          </h1>
+          <p className="text-base leading-relaxed! text-body-color md:text-lg mb-8 max-w-2xl mx-auto">
+            Innovative software solutions designed to accelerate business growth and digital transformation.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center gap-2">
+              Explore Products <ArrowRight size={20} />
+            </button>
+            <button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+              Contact Us
+            </button>
           </div>
           <div className="flex justify-center">
             <Image
               src={productImage}
               alt="Products"
-              width={500}
+              width={600}
               height={400}
-              className="w-full max-w-md"
+              className="w-full max-w-lg rounded-lg shadow-lg"
             />
           </div>
         </div>
       </section>
 
-      {/* Products Grid */}
+      {/* Products Showcase - Alternating Layout */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Our Products</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product) => {
+        <h2 className="mb-12 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Our Products</h2>
+        <div className="space-y-16">
+          {products.map((product, index) => {
             const Icon = product.icon;
+            const isEven = index % 2 === 0;
             return (
               <div
                 key={product.id}
-                className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${
-                  isDark ? 'bg-gray-800' : 'bg-white border'
-                }`}
+                className={`grid lg:grid-cols-2 gap-12 items-center ${isEven ? '' : 'lg:grid-flow-col-dense'}`}
               >
-                <Icon size={48} className="text-blue-600 mb-4" />
-                <h3 className="text-xl font-semibold mb-3">{product.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">{product.description}</p>
-                <ul className="mb-4 space-y-1">
-                  {product.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-sm">
-                      <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <button className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2">
-                  Learn More <ArrowRight size={16} />
+                <div className={`${isEven ? '' : 'lg:col-start-2'}`}>
+                  <Icon size={64} className="text-blue-600 mb-6" />
+                  <h3 className="text-2xl font-bold mb-4">{product.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-6 text-lg">{product.description}</p>
+                  <ul className="mb-6 space-y-2">
+                    {product.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-blue-600 rounded-full shrink-0"></div>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <button className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2">
+                    Learn More <ArrowRight size={16} />
+                  </button>
+                </div>
+                <div className={`${isEven ? 'lg:col-start-2' : ''} flex justify-center`}>
+                  <div className={`w-64 h-64 rounded-full ${isDark ? 'bg-gray-800' : 'bg-gray-100'} flex items-center justify-center shadow-lg`}>
+                    <Icon size={80} className="text-blue-600" />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Why Choose Section - Card Grid */}
+      <section className="bg-gray-50 dark:bg-gray-900 py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="mb-12 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Why Choose ActroTech Products?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
+            {whyChoose.map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <div key={idx} className="text-center group">
+                  <div className={`w-20 h-20 mx-auto mb-4 rounded-full ${isDark ? 'bg-gray-800' : 'bg-white'} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow`}>
+                    <Icon size={40} className="text-blue-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold">{item.title}</h3>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action - Split Layout */}
+      <section className="bg-linear-to-r from-blue-600 to-purple-600 text-white py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="mb-6 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px]">Ready to Transform Your Business?</h2>
+              <p className="text-base leading-relaxed! md:text-lg mb-8 text-blue-100">
+                Join thousands of businesses that trust ActroTech products for their digital transformation journey.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                  Get Started
+                </button>
+                <button className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold transition-colors">
+                  Contact Us
                 </button>
               </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Why Choose Section */}
-      <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Why Choose ActroTech Products?</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {whyChoose.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <div key={idx} className="text-center">
-                <Icon size={64} className="text-blue-600 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold">{item.title}</h3>
+            </div>
+            <div className="flex justify-center">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
+                  <div className="text-3xl font-bold mb-2">500+</div>
+                  <div className="text-sm text-blue-100">Happy Clients</div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
+                  <div className="text-3xl font-bold mb-2">50+</div>
+                  <div className="text-sm text-blue-100">Products</div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
+                  <div className="text-3xl font-bold mb-2">99.9%</div>
+                  <div className="text-sm text-blue-100">Uptime</div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
+                  <div className="text-3xl font-bold mb-2">24/7</div>
+                  <div className="text-sm text-blue-100">Support</div>
+                </div>
               </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-6">Ready to Transform Your Business?</h2>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-              Get Started
-            </button>
-            <button className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold transition-colors">
-              Contact Us
-            </button>
+            </div>
           </div>
         </div>
       </section>

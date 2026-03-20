@@ -117,108 +117,116 @@ const whyChoose = [
 export default function WebApplicationDevelopmentPage() {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
-  const webAppImage = isDark ? '/images/new/ui-dark.png' : '/images/new/ui-light.png';
+  const webAppImage = isDark ? '/images/new/web-dark.png' : '/images/new/web-light.png';
   const previewImage1 = isDark ? '/images/new/ui-preview-dark.png' : '/images/new/ui-preview-light.png';
   const previewImage2 = isDark ? '/images/new/ui-preview-light.png' : '/images/new/ui-preview-dark.png'; // Alternate for variety
 
   return (
     <div className={`mt-8 min-h-screen ${isDark ? 'bg-[#0B1120] text-white' : 'bg-white text-gray-900'}`}>
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 py-16 lg:py-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-              Web Application Development
-            </h1>
-            <p className="text-lg lg:text-xl mb-4 text-gray-600 dark:text-gray-300">
-              We build scalable, secure, and high-performance web applications tailored to your business needs.
-            </p>
-            <p className="text-base mb-8 text-gray-600 dark:text-gray-300">
-              From startups to enterprise platforms, we deliver robust web applications that are fast, reliable, and user-friendly.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center gap-2">
-                Start Your Project <ArrowRight size={20} />
-              </button>
-              <button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors">
-                Contact Us
-              </button>
-            </div>
+      {/* Hero Section - Centered with Tech Stack */}
+      <section className="container mx-auto px-4 py-16 lg:py-24 text-center">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px]">
+            Web Application Development
+          </h1>
+          <p className="text-base leading-relaxed! text-body-color md:text-lg mb-6 max-w-2xl mx-auto">
+            We build scalable, secure, and high-performance web applications tailored to your business needs.
+          </p>
+          <p className="text-base leading-relaxed! text-body-color md:text-lg mb-8 max-w-2xl mx-auto">
+            From startups to enterprise platforms, we deliver robust web applications that are fast, reliable, and user-friendly.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center gap-2">
+              Start Your Project <ArrowRight size={20} />
+            </button>
+            <button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+              Contact Us
+            </button>
           </div>
           <div className="flex justify-center">
             <Image
               src={webAppImage}
               alt="Web Application Development"
-              width={500}
+              width={600}
               height={400}
-              className="w-full max-w-md"
+              className="w-full max-w-lg rounded-lg shadow-lg"
             />
           </div>
         </div>
       </section>
 
-      {/* What We Build */}
-      <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">What We Build</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {whatWeBuild.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={idx}
-                className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${
-                  isDark ? 'bg-gray-800' : 'bg-white border'
-                }`}
-              >
-                <Icon size={48} className="text-blue-600 mb-4" />
-                <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
-              </div>
-            );
-          })}
+      {/* What We Build - Hexagonal Cards */}
+      <section className="bg-gray-50 dark:bg-gray-900 py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="mb-12 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">What We Build</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {whatWeBuild.map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <div key={idx} className="group relative">
+                  <div className={`absolute inset-0 ${isDark ? 'bg-gray-800' : 'bg-white'} transform rotate-3 group-hover:rotate-6 transition-transform shadow-lg`}></div>
+                  <div className={`relative p-8 ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-lg group-hover:shadow-xl transition-all duration-300`}>
+                    <div className="flex justify-center mb-6">
+                      <div className={`w-20 h-20 rounded-full ${isDark ? 'bg-gray-700' : 'bg-blue-50'} flex items-center justify-center`}>
+                        <Icon size={40} className="text-blue-600" />
+                      </div>
+                    </div>
+                    <h3 className="text-xl font-bold mb-4 text-center">{item.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-center">{item.description}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
-      {/* Technologies */}
+      {/* Technologies - Interactive Cards */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Technologies & Stack</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {Object.entries(technologies).map(([category, techs]) => (
-            <div key={category} className={`p-6 rounded-lg ${isDark ? 'bg-gray-800' : 'bg-gray-50'}`}>
-              <h3 className="text-xl font-semibold mb-4 text-blue-600">{category}</h3>
-              <div className="flex flex-wrap gap-2">
-                {techs.map((tech, idx) => (
-                  <span
-                    key={idx}
-                    className={`px-3 py-1 rounded-full text-sm font-medium ${
-                      isDark ? 'bg-gray-700 text-white' : 'bg-white text-gray-900 border'
-                    }`}
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Key Features */}
-      <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Key Features of Our Applications</h2>
+        <h2 className="mb-12 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Technologies & Stack</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {keyFeatures.map((feature, idx) => (
-            <div key={idx} className="flex items-center gap-3">
-              <CheckCircle size={24} className="text-green-600" />
-              <span className="text-lg">{feature}</span>
+          {Object.entries(technologies).map(([category, techs]) => (
+            <div key={category} className="group">
+              <div className={`p-6 rounded-xl ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 border-transparent hover:border-blue-300`}>
+                <h3 className="text-xl font-bold mb-4 text-blue-600 text-center">{category}</h3>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {techs.map((tech, idx) => (
+                    <span
+                      key={idx}
+                      className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-110 ${
+                        isDark ? 'bg-gray-700 text-white hover:bg-blue-600' : 'bg-gray-100 text-gray-900 hover:bg-blue-100'
+                      }`}
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Key Features - Feature Grid */}
+      <section className="bg-gray-50 dark:bg-gray-900 py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="mb-12 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Key Features of Our Applications</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {keyFeatures.map((feature, idx) => (
+              <div key={idx} className="text-center group">
+                <div className={`w-16 h-16 mx-auto mb-4 rounded-full ${isDark ? 'bg-gray-800' : 'bg-white'} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow`}>
+                  <CheckCircle size={24} className="text-green-600" />
+                </div>
+                <p className="text-sm font-medium">{feature}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Development Process */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Our Development Process</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Our Development Process</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {process.map((step) => {
             const Icon = step.icon;
@@ -245,7 +253,7 @@ export default function WebApplicationDevelopmentPage() {
 
       {/* UI Showcase */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Sample Web Applications</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Sample Web Applications</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow">
             <Image
@@ -270,7 +278,7 @@ export default function WebApplicationDevelopmentPage() {
 
       {/* Why Choose */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Why Choose ActroTech</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Why Choose ActroTech</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {whyChoose.map((item, idx) => {
             const Icon = item.icon;
@@ -285,9 +293,9 @@ export default function WebApplicationDevelopmentPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
+      <section className="bg-linear-to-r from-blue-600 to-purple-600 text-white py-16">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-6">Let's Build Your Next Web Application</h2>
+          <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px]">Let's Build Your Next Web Application</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
               Get Started

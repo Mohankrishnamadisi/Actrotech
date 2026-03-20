@@ -17,6 +17,7 @@ import {
   ShoppingCart,
   Shield,
   Headphones,
+  Server,
   ArrowRight,
 } from 'lucide-react';
 
@@ -141,26 +142,26 @@ const whyChoose = [
 export default function BackendServicesPage() {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
-  const backendImage = isDark ? '/images/new/ui-dark.png' : '/images/new/ui-light.png';
+  const backendImage = isDark ? '/images/new/backend-dark.png' : '/images/new/backend-light.png';
   const previewImage1 = isDark ? '/images/new/ui-preview-dark.png' : '/images/new/ui-preview-light.png';
   const previewImage2 = isDark ? '/images/new/ui-preview-light.png' : '/images/new/ui-preview-dark.png';
 
   return (
     <div className={`mt-8 min-h-screen ${isDark ? 'bg-[#0B1120] text-white' : 'bg-white text-gray-900'}`}>
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 py-16 lg:py-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6">
+      {/* Hero Section - Server Architecture Theme */}
+      <section className="bg-linear-to-br from-gray-900 via-blue-900 to-gray-900 text-white py-16 lg:py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h1 className="mb-4 text-3xl font-bold leading-tight! text-white sm:text-4xl md:text-[45px]">
               Backend Development Services
             </h1>
-            <p className="text-lg lg:text-xl mb-4 text-gray-600 dark:text-gray-300">
+            <p className="text-base leading-relaxed! text-gray-300 md:text-lg mb-4 max-w-2xl mx-auto">
               We build powerful, secure, and scalable backend systems that drive modern applications.
             </p>
-            <p className="text-base mb-8 text-gray-600 dark:text-gray-300">
+            <p className="text-base leading-relaxed! text-gray-300 md:text-lg mb-8 max-w-2xl mx-auto">
               Our backend solutions ensure seamless data processing, system integration, and business logic execution, enabling your applications to perform efficiently at scale.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center gap-2">
                 Start Your Project <ArrowRight size={20} />
               </button>
@@ -169,21 +170,48 @@ export default function BackendServicesPage() {
               </button>
             </div>
           </div>
+          
+          {/* Server Architecture Visualization */}
           <div className="flex justify-center">
-            <Image
-              src={backendImage}
-              alt="Backend Development"
-              width={500}
-              height={400}
-              className="w-full max-w-md"
-            />
+            <div className="grid grid-cols-3 gap-8 items-center">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-2">
+                  <Database size={32} className="text-white" />
+                </div>
+                <div className="text-sm text-gray-300">Database</div>
+              </div>
+              <div className="text-center">
+                <div className="w-20 h-20 bg-green-600 rounded-lg flex items-center justify-center mx-auto mb-2 relative">
+                  <Server size={40} className="text-white" />
+                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full animate-pulse"></div>
+                </div>
+                <div className="text-sm text-gray-300">Backend Server</div>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-purple-600 rounded-lg flex items-center justify-center mx-auto mb-2">
+                  <Cloud size={32} className="text-white" />
+                </div>
+                <div className="text-sm text-gray-300">Cloud</div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Connection Lines */}
+          <div className="flex justify-center mt-8">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-0.5 bg-blue-400"></div>
+              <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+              <div className="w-24 h-0.5 bg-green-400"></div>
+              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+              <div className="w-12 h-0.5 bg-purple-400"></div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* What We Offer */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">What We Offer</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">What We Offer</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {whatWeOffer.map((offer, idx) => {
             const Icon = offer.icon;
@@ -205,7 +233,7 @@ export default function BackendServicesPage() {
 
       {/* Technologies */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Technologies We Use</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Technologies We Use</h2>
         <div className="flex flex-wrap justify-center gap-4">
           {technologies.map((tech, idx) => (
             <span
@@ -222,7 +250,7 @@ export default function BackendServicesPage() {
 
       {/* Key Features */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Key Features of Our Backend Systems</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Key Features of Our Backend Systems</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {keyFeatures.map((feature, idx) => (
             <div key={idx} className="flex items-center gap-3">
@@ -235,7 +263,7 @@ export default function BackendServicesPage() {
 
       {/* Architecture & Approach */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Our Approach</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Our Approach</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {approach.map((step) => {
             const Icon = step.icon;
@@ -262,7 +290,7 @@ export default function BackendServicesPage() {
 
       {/* Use Cases */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Backend Use Cases</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Backend Use Cases</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {useCases.map((useCase, idx) => {
             const Icon = useCase.icon;
@@ -278,7 +306,7 @@ export default function BackendServicesPage() {
 
       {/* System Showcase */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Backend in Action</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Backend in Action</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow">
             <Image
@@ -303,7 +331,7 @@ export default function BackendServicesPage() {
 
       {/* Why Choose */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Why Choose ActroTech</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Why Choose ActroTech</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {whyChoose.map((item, idx) => {
             const Icon = item.icon;
@@ -318,9 +346,9 @@ export default function BackendServicesPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
+      <section className="bg-linear-to-r from-blue-600 to-purple-600 text-white py-16">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-6">Build Robust Backend Systems with ActroTech</h2>
+          <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px]">Build Robust Backend Systems with ActroTech</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
               Get Started

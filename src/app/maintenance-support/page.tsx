@@ -159,49 +159,74 @@ const whyChoose = [
 export default function MaintenanceSupportPage() {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
-  const supportImage = isDark ? '/images/new/ui-dark.png' : '/images/new/ui-light.png';
+  const supportImage = isDark ? '/images/new/ms-dark.png' : '/images/new/ms-light.png';
   const previewImage1 = isDark ? '/images/new/ui-preview-dark.png' : '/images/new/ui-preview-light.png';
   const previewImage2 = isDark ? '/images/new/ui-preview-light.png' : '/images/new/ui-preview-dark.png';
 
   return (
-    <div className={`mt-8min-h-screen ${isDark ? 'bg-[#0B1120] text-white' : 'bg-white text-gray-900'}`}>
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 py-16 lg:py-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-              Maintenance & Support Services
-            </h1>
-            <p className="text-lg lg:text-xl mb-4 text-gray-600 dark:text-gray-300">
-              We ensure your applications run smoothly, securely, and efficiently with continuous monitoring and support.
-            </p>
-            <p className="text-base mb-8 text-gray-600 dark:text-gray-300">
-              Our dedicated maintenance and support services help you minimize downtime, fix issues quickly, and keep your systems up-to-date with the latest technologies.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center gap-2">
-                Get Support <ArrowRight size={20} />
-              </button>
-              <button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors">
-                Contact Us
-              </button>
+    <div className={`mt-8 min-h-screen ${isDark ? 'bg-[#0B1120] text-white' : 'bg-white text-gray-900'}`}>
+      {/* Hero Section - Support Dashboard Theme */}
+      <section className="bg-gray-50 dark:bg-gray-900 py-16 lg:py-24">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h1 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px]">
+                Maintenance & Support Services
+              </h1>
+              <p className="text-base leading-relaxed! text-body-color md:text-lg mb-4">
+                We ensure your applications run smoothly, securely, and efficiently with continuous monitoring and support.
+              </p>
+              <p className="text-base leading-relaxed! text-body-color md:text-lg mb-8">
+                Our dedicated maintenance and support services help you minimize downtime, fix issues quickly, and keep your systems up-to-date with the latest technologies.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center gap-2">
+                  Get Support <ArrowRight size={20} />
+                </button>
+                <button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                  Contact Us
+                </button>
+              </div>
             </div>
-          </div>
-          <div className="flex justify-center">
-            <Image
-              src={supportImage}
-              alt="Maintenance & Support"
-              width={500}
-              height={400}
-              className="w-full max-w-md"
-            />
+            <div className="flex justify-center">
+              {/* Support Dashboard Mockup */}
+              <div className={`w-full max-w-md p-6 rounded-lg shadow-lg ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold">System Status</h3>
+                  <div className="flex space-x-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm text-green-600">Online</span>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm">Server Health</span>
+                    <div className="w-20 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                      <div className="bg-green-500 h-2 rounded-full w-4/5"></div>
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm">Response Time</span>
+                    <span className="text-sm font-medium text-green-600">120ms</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm">Uptime</span>
+                    <span className="text-sm font-medium text-green-600">99.9%</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm">Active Issues</span>
+                    <span className="text-sm font-medium text-red-600">0</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* What We Offer */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">What We Offer</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">What We Offer</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {whatWeOffer.map((offer, idx) => {
             const Icon = offer.icon;
@@ -223,7 +248,7 @@ export default function MaintenanceSupportPage() {
 
       {/* Support Models */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Support Plans</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Support Plans</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {supportModels.map((model, idx) => {
             const Icon = model.icon;
@@ -252,7 +277,7 @@ export default function MaintenanceSupportPage() {
 
       {/* Key Features */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Key Features</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Key Features</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {keyFeatures.map((feature, idx) => (
             <div key={idx} className="flex items-center gap-3">
@@ -265,7 +290,7 @@ export default function MaintenanceSupportPage() {
 
       {/* Maintenance Process */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Our Process</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Our Process</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {process.map((step) => {
             const Icon = step.icon;
@@ -292,7 +317,7 @@ export default function MaintenanceSupportPage() {
 
       {/* Use Cases */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Where We Help</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Where We Help</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {useCases.map((useCase, idx) => {
             const Icon = useCase.icon;
@@ -308,7 +333,7 @@ export default function MaintenanceSupportPage() {
 
       {/* Support Showcase */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Support in Action</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Support in Action</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow">
             <Image
@@ -333,7 +358,7 @@ export default function MaintenanceSupportPage() {
 
       {/* Why Choose */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">Why Choose ActroTech</h2>
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Why Choose ActroTech</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {whyChoose.map((item, idx) => {
             const Icon = item.icon;
@@ -348,9 +373,9 @@ export default function MaintenanceSupportPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
+      <section className="bg-linear-to-r from-blue-600 to-purple-600 text-white py-16">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-6">Keep Your Applications Running Smoothly with ActroTech</h2>
+          <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px]">Keep Your Applications Running Smoothly with ActroTech</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
               Get Support
