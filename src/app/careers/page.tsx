@@ -3,6 +3,7 @@
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import {
   Users,
   Rocket,
@@ -25,6 +26,7 @@ import {
 } from 'lucide-react';
 import Button from '@/components/Common/Button';
 import SectionTitle from '@/components/Common/SectionTitle';
+import { applyForJob } from '@/lib/services';
 
 const whyWorkWithUs = [
   {
@@ -132,6 +134,15 @@ export default function CareersPage() {
   const careerImage = isDark ? '/images/new/ca-dark.png' : '/images/new/ca-dark.png';
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('all');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [applicationForm, setApplicationForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    role: '',
+    resume_url: '',
+  });
+  const [loading, setLoading] = useState(false);
 
   const filteredJobs = newOpenings.filter(job => {
     const matchesSearch = job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -142,6 +153,41 @@ export default function CareersPage() {
                          (filterType === 'fullstack' && job.title.toLowerCase().includes('full stack'));
     return matchesSearch && matchesFilter;
   });
+
+  const handleApplyClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setApplicationForm({ ...applicationForm, [e.target.name]: e.target.value });
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!applicationForm.name || !applicationForm.email || !applicationForm.phone || !applicationForm.role || !applicationForm.resume_url) {
+      toast.error('All fields are required');
+      return;
+    }
+    if (!/\S+@\S+\.\S+/.test(applicationForm.email)) {
+      toast.error('Invalid email');
+      return;
+    }
+    if (!/^\d{10}$/.test(applicationForm.phone)) {
+      toast.error('Invalid phone number (10 digits)');
+      return;
+    }
+    setLoading(true);
+    try {
+      await applyForJob(applicationForm.name, applicationForm.email, applicationForm.phone, applicationForm.role, applicationForm.resume_url);
+      toast.success('Application submitted successfully!');
+      setApplicationForm({ name: '', email: '', phone: '', role: '', resume_url: '' });
+      setIsModalOpen(false);
+    } catch (error) {
+      toast.error('Failed to submit application');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className={`mt-8 min-h-screen ${isDark ? 'bg-[#0B1120] text-white' : 'bg-white text-gray-900'}`}>
@@ -162,7 +208,7 @@ export default function CareersPage() {
               <button className="group relative flex rounded-lg bg-linear-to-r from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0 items-center gap-2">
                 View Open Positions <ArrowRight size={20} />
               </button>
-              <button className="group relative flex rounded-lg border-2 border-primary bg-transparent px-6 py-3 text-base font-semibold text-primary transition-all duration-300 ease-in-out hover:bg-primary hover:text-white dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-white">
+              <button className="group relative flex rounded-lg border-2 border-primary bg-transparent px-6 py-3 text-base font-semibold text-primary transition-all duration-300 ease-in-out hover:bg-primary hover:text-white dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-white" onClick={handleApplyClick}>
                 Apply Now
               </button>
             </div>
@@ -337,7 +383,7 @@ export default function CareersPage() {
                       ))}
                     </div>
                   </div>
-                  <Button variant="primary" className="w-full justify-center py-3 text-sm gap-2">
+                  <Button onClick={handleApplyClick} variant="primary" className="w-full justify-center py-3 text-sm gap-2">
                     Apply Now <ArrowRight size={16} />
                   </Button>
                 </div>
@@ -487,7 +533,7 @@ export default function CareersPage() {
             We're always looking for talented individuals to join our mission.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1 mx-auto">
+            <button onClick={handleApplyClick} className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1 mx-auto">
               Apply Now <ArrowRight size={20} />
             </button>
             <button className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg font-semibold transition-all duration-300 mx-auto">
@@ -496,6 +542,88 @@ export default function CareersPage() {
           </div>
         </div>
       </section>
+
+      {/* Job Application Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className={`p-8 rounded-lg shadow-2xl max-w-md w-full mx-4 ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+            <h3 className="text-2xl font-bold mb-6 text-center">Apply for Job</h3>
+            <form onSubmit={handleFormSubmit}>
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-2">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={applicationForm.name}
+                  onChange={handleFormChange}
+                  className={`w-full px-3 py-2 border rounded ${isDark ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-2">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={applicationForm.email}
+                  onChange={handleFormChange}
+                  className={`w-full px-3 py-2 border rounded ${isDark ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-2">Phone</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={applicationForm.phone}
+                  onChange={handleFormChange}
+                  className={`w-full px-3 py-2 border rounded ${isDark ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-2">Role</label>
+                <input
+                  type="text"
+                  name="role"
+                  value={applicationForm.role}
+                  onChange={handleFormChange}
+                  className={`w-full px-3 py-2 border rounded ${isDark ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}
+                  required
+                />
+              </div>
+              <div className="mb-6">
+                <label className="block text-sm font-medium mb-2">Resume URL</label>
+                <input
+                  type="url"
+                  name="resume_url"
+                  value={applicationForm.resume_url}
+                  onChange={handleFormChange}
+                  className={`w-full px-3 py-2 border rounded ${isDark ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}
+                  required
+                />
+              </div>
+              <div className="flex gap-4">
+                <button
+                  type="button"
+                  onClick={() => setIsModalOpen(false)}
+                  className="flex-1 px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+                >
+                  {loading ? 'Submitting...' : 'Submit'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

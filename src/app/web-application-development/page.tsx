@@ -136,12 +136,12 @@ export default function WebApplicationDevelopmentPage() {
             From startups to enterprise platforms, we deliver robust web applications that are fast, reliable, and user-friendly.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <button className="group relative flex rounded-lg bg-linear-to-r from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0 items-center gap-2">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center gap-2">
               Start Your Project <ArrowRight size={20} />
             </button>
-            <button className="group relative flex rounded-lg border-2 border-primary bg-transparent px-6 py-3 text-base font-semibold text-primary transition-all duration-300 ease-in-out hover:bg-primary hover:text-white dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-white">
+            <a href="/contact" className="group relative flex rounded-lg border-2 border-primary bg-transparent px-6 py-3 text-base font-semibold text-primary transition-all duration-300 ease-in-out hover:bg-primary hover:text-white dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-white">
               Contact Us
-            </button>
+            </a>
           </div>
           <div className="flex justify-center">
             <Image
@@ -207,20 +207,16 @@ export default function WebApplicationDevelopmentPage() {
         </div>
       </section>
 
-      {/* Key Features - Feature Grid */}
-      <section className="bg-gray-50 dark:bg-gray-900 py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Key Features of Our Applications</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {keyFeatures.map((feature, idx) => (
-              <div key={idx} className="text-center group">
-                <div className={`w-16 h-16 mx-auto mb-4 rounded-full ${isDark ? 'bg-gray-800' : 'bg-white'} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow`}>
-                  <CheckCircle size={24} className="text-green-600" />
-                </div>
-                <p className="text-sm font-medium">{feature}</p>
-              </div>
-            ))}
-          </div>
+      {/* Key Features */}
+      <section className="container mx-auto px-4 py-16">
+        <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Key Features of Our Applications</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {keyFeatures.map((feature, idx) => (
+            <div key={idx} className="flex items-center gap-3">
+              <CheckCircle size={24} className="text-green-600" />
+              <span className="text-lg">{feature}</span>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -293,7 +289,7 @@ export default function WebApplicationDevelopmentPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="bg-linear-to-r from-blue-600 to-purple-600 text-white py-16">
+      <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px]">Let's Build Your Next Web Application</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

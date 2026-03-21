@@ -1,9 +1,40 @@
 "use client";
 
+import { useState } from "react";
+import toast from "react-hot-toast";
 import { useTheme } from "next-themes";
+import { subscribeToUpdates } from "@/lib/services";
 
 const NewsLatterBox = () => {
   const { theme } = useTheme();
+  const [formData, setFormData] = useState({ name: "", email: "" });
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email) {
+      toast.error("Name and email are required");
+      return;
+    }
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      toast.error("Invalid email");
+      return;
+    }
+    setLoading(true);
+    try {
+      await subscribeToUpdates(formData.email, formData.name);
+      toast.success("Subscribed successfully!");
+      setFormData({ name: "", email: "" });
+    } catch (error) {
+      toast.error("Failed to subscribe");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="shadow-three dark:bg-gray-dark relative z-10 rounded-xs bg-white p-8 sm:p-11 lg:p-8 xl:p-11">
@@ -13,28 +44,34 @@ const NewsLatterBox = () => {
       <p className="border-body-color/25 text-body-color mb-11 border-b pb-11 text-base leading-relaxed dark:border-white/25">
         Stay updated with the latest trends in software development, technology insights, and staffing opportunities.
       </p>
-      <div>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="name"
+          value={formData.name}
+          onChange={handleChange}
           placeholder="Enter your name"
           className="border-stroke text-body-color focus:border-primary dark:text-body-color-dark dark:shadow-two dark:focus:border-primary mb-4 w-full rounded-xs border bg-[#f8f8f8] px-6 py-3 text-base outline-hidden dark:border-transparent dark:bg-[#2C303B] dark:focus:shadow-none"
         />
         <input
           type="email"
           name="email"
+          value={formData.email}
+          onChange={handleChange}
           placeholder="Enter your email"
           className="border-stroke text-body-color focus:border-primary dark:text-body-color-dark dark:shadow-two dark:focus:border-primary mb-4 w-full rounded-xs border bg-[#f8f8f8] px-6 py-3 text-base outline-hidden dark:border-transparent dark:bg-[#2C303B] dark:focus:shadow-none"
         />
-        <input
+        <button
           type="submit"
-          value="Subscribe"
-          className="bg-primary mb-5 flex w-full cursor-pointer items-center justify-center rounded-lg px-9 py-4 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0"
-        />
+          disabled={loading}
+          className="bg-primary mb-5 flex w-full cursor-pointer items-center justify-center rounded-lg px-9 py-4 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0 disabled:opacity-50"
+        >
+          {loading ? "Subscribing..." : "Subscribe"}
+        </button>
         <p className="text-body-color dark:text-body-color-dark text-center text-base leading-relaxed">
           No spam guaranteed. Only valuable insights and industry updates.
         </p>
-      </div>
+      </form>
 
       <div>
         <span className="absolute top-7 left-2">

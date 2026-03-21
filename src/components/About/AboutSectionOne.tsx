@@ -56,14 +56,17 @@ const AboutSectionOne = () => {
                   <Image
                     src="/images/about/about-image.svg"
                     alt="about-image"
-                    fill
-                    className="object-cover mx-auto max-w-full drop-shadow-three dark:hidden dark:drop-shadow-none lg:mr-0"
+                    width={500}
+                    height={500}
+                    className="mx-auto max-w-full dark:hidden"
                   />
+
                   <Image
                     src="/images/about/about-image-dark.svg"
                     alt="about-image"
-                    fill
-                    className="object-cover mx-auto hidden max-w-full drop-shadow-three dark:block dark:drop-shadow-none lg:mr-0"
+                    width={500}
+                    height={500}
+                    className="mx-auto hidden max-w-full dark:block"
                   />
                 </div>
               </div>

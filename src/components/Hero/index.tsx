@@ -45,7 +45,7 @@ const Hero = () => {
             <Button href="/contact" variant="primary" className="w-full max-w-55 animate-slide-up">
               Find Talent
             </Button>
-            <Button href="/about" variant="secondary" className="w-full max-w-55 animate-slide-up">
+            <Button href="/careers" variant="secondary" className="w-full max-w-55 animate-slide-up">
               Our Solutions
             </Button>
           </div>

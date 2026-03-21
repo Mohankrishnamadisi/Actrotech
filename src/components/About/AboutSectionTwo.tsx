@@ -8,19 +8,22 @@ const AboutSectionTwo = () => {
           <div className="w-full px-4 lg:w-1/2">
             <div className="group relative mx-auto mb-12 aspect-25/24 max-w-117.5 text-center lg:m-0" data-wow-delay=".15s">
               <div className="absolute inset-0 rounded-[28px] bg-linear-to-br from-violet-500/20 via-blue-500/15 to-cyan-400/15 blur-xl opacity-70 transition-all duration-500 group-hover:opacity-100" />
-              <div className="relative overflow-hidden rounded-[26px] border border-white/20 shadow-2xl transition-transform duration-500 ease-out hover:scale-105">
-                <Image
-                  src="/images/about/about-image-2.svg"
-                  alt="about image"
-                  fill
-                  className="object-cover drop-shadow-three dark:hidden dark:drop-shadow-none"
-                />
-                <Image
-                  src="/images/about/about-image-2-dark.svg"
-                  alt="about image"
-                  fill
-                  className="object-cover hidden drop-shadow-three dark:block dark:drop-shadow-none"
-                />
+              <div className="relative overflow-hidden rounded-[26px] border border-white/20 shadow-2xl transition-transform duration-500 ease-out hover:scale-105">        
+              <Image
+                src="/images/about/about-image-2.svg"
+                alt="about image"
+                width={500}
+                height={500}
+                className="mx-auto dark:hidden"
+              />
+
+              <Image
+                src="/images/about/about-image-2-dark.svg"
+                alt="about image"
+                width={500}
+                height={500}
+                className="mx-auto hidden dark:block"
+              />
               </div>
             </div>
           </div>
