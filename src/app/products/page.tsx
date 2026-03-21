@@ -16,6 +16,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import NewsLatterBox from '@/components/Contact/NewsLatterBox';
+import { scrollToSection } from '@/lib/scroll';
 
 const products = [
   {
@@ -71,7 +72,7 @@ export default function ProductsPage() {
   return (
     <div className={`mt-8 min-h-screen ${isDark ? 'bg-[#0B1120] text-white' : 'bg-white text-gray-900'}`}>
       {/* Hero Section - Centered Layout */}
-      <section className="container mx-auto px-4 py-16 lg:py-24 text-center">
+      <section data-animate className="container mx-auto px-4 py-16 lg:py-24 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px]">
             Our Products & Solutions
@@ -80,7 +81,10 @@ export default function ProductsPage() {
             Innovative software solutions designed to accelerate business growth and digital transformation.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <button className="group relative flex rounded-lg bg-linear-to-r from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0 items-center gap-2">
+            <button
+              onClick={() => scrollToSection('products-list')}
+              className="group relative flex rounded-lg bg-linear-to-r from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0 items-center gap-2"
+            >
               Explore Products <ArrowRight size={20} />
             </button>
             <a href="/contact" className="group relative flex rounded-lg border-2 border-primary bg-transparent px-6 py-3 text-base font-semibold text-primary transition-all duration-300 ease-in-out hover:bg-primary hover:text-white dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-white">
@@ -100,7 +104,7 @@ export default function ProductsPage() {
       </section>
 
       {/* Products Showcase - Alternating Layout */}
-      <section className="container mx-auto px-4 py-16">
+      <section id="products-list" data-animate className="container mx-auto px-4 py-16">
         <h2 className="mb-12 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">Our Products</h2>
         <div className="space-y-16">
           {products.map((product, index) => {
