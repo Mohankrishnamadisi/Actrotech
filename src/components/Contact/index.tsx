@@ -1,3 +1,4 @@
+import Button from "@/components/Common/Button";
 import NewsLatterBox from "./NewsLatterBox";
 
 const Contact = () => {
@@ -7,7 +8,7 @@ const Contact = () => {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 lg:w-7/12 xl:w-8/12">
             <div
-              className="mb-12 rounded-xs bg-white px-8 py-11 shadow-three dark:bg-gray-dark sm:p-[55px] lg:mb-5 lg:px-8 xl:p-[55px]"
+              className="mb-12 rounded-xs bg-white px-8 py-11 shadow-three dark:bg-gray-dark sm:p-14 lg:mb-5 lg:px-8 xl:p-14"
               data-wow-delay=".15s
               "
             >
@@ -66,9 +67,9 @@ const Contact = () => {
                     </div>
                   </div>
                   <div className="w-full px-4">
-                    <button className="rounded-lg bg-gradient-to-r from-primary to-primary/80 px-9 py-4 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0">
+                    <Button className="w-full justify-center px-9 py-4" variant="primary">
                       Submit Request
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </form>

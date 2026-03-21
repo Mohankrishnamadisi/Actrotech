@@ -23,6 +23,7 @@ import {
   Briefcase,
   Star,
 } from 'lucide-react';
+import Button from '@/components/Common/Button';
 import SectionTitle from '@/components/Common/SectionTitle';
 
 const whyWorkWithUs = [
@@ -158,12 +159,12 @@ export default function CareersPage() {
               We are always looking for passionate developers, designers, and problem-solvers to join our growing team.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+              <Button variant="primary" className="w-full justify-center px-8 py-4 text-base gap-2">
                 View Open Positions <ArrowRight size={20} />
-              </button>
-              <button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-400 dark:hover:text-gray-900">
+              </Button>
+              <Button variant="secondary" className="w-full justify-center px-8 py-4 text-base gap-2">
                 Apply Now
-              </button>
+              </Button>
             </div>
           </div>
           <div className="flex justify-center">
@@ -336,9 +337,9 @@ export default function CareersPage() {
                       ))}
                     </div>
                   </div>
-                  <button className="w-full bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2">
+                  <Button variant="primary" className="w-full justify-center py-3 text-sm gap-2">
                     Apply Now <ArrowRight size={16} />
-                  </button>
+                  </Button>
                 </div>
               ))}
             </div>
@@ -409,7 +410,7 @@ export default function CareersPage() {
       </section>
 
       {/* Benefits */}
-      <section className="py-16 lg:py-24 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
+      <section className="py-16 lg:py-24 bg-linear-to-r from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
         <div className="container mx-auto px-4">
           <SectionTitle
             title="Benefits & Perks"
@@ -467,7 +468,7 @@ export default function CareersPage() {
               </div>
             </div>
             <div className="flex justify-center">
-              <div className={`p-8 rounded-2xl ${isDark ? 'bg-gradient-to-br from-blue-600/20 to-purple-600/20' : 'bg-gradient-to-br from-blue-100 to-purple-100'}`}>
+              <div className={`p-8 rounded-2xl ${isDark ? 'bg-linear-to-br from-blue-600/20 to-purple-600/20' : 'bg-linear-to-br from-blue-100 to-purple-100'}`}>
                 <Users className={`w-32 h-32 ${isDark ? 'text-blue-400' : 'text-blue-600'}`} />
               </div>
             </div>

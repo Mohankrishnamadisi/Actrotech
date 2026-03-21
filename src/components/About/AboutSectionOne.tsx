@@ -10,7 +10,7 @@ const checkIcon = (
 const AboutSectionOne = () => {
   const List = ({ text }) => (
     <p className="text-body-color mb-5 flex items-center text-lg font-medium">
-      <span className="bg-primary/10 text-primary mr-4 flex h-[30px] w-[30px] items-center justify-center rounded-md">
+      <span className="bg-primary/10 text-primary mr-4 flex h-7.5 w-7.5 items-center justify-center rounded-md">
         {checkIcon}
       </span>
       {text}
@@ -20,7 +20,7 @@ const AboutSectionOne = () => {
   return (
     <section id="about" className="pt-16 md:pt-20 lg:pt-28">
       <div className="container">
-        <div className="border-b border-body-color/[.15] pb-16 dark:border-white/[.15] md:pb-20 lg:pb-28">
+        <div className="border-b border-body-color/15 pb-16 dark:border-white/15 md:pb-20 lg:pb-28">
           <div className="-mx-4 flex flex-wrap items-center">
             <div className="w-full px-4 lg:w-1/2">
               <SectionTitle
@@ -30,10 +30,10 @@ const AboutSectionOne = () => {
               />
 
               <div
-                className="mb-12 max-w-[570px] lg:mb-0"
+                className="mb-12 max-w-142.5 lg:mb-0"
                 data-wow-delay=".15s"
               >
-                <div className="mx-[-12px] flex flex-wrap">
+                <div className="-mx-3 flex flex-wrap">
                   <div className="w-full px-3 sm:w-1/2 lg:w-full xl:w-1/2">
                     <List text="Custom Software Development" />
                     <List text="Cloud Solutions" />
@@ -50,19 +50,22 @@ const AboutSectionOne = () => {
             </div>
 
             <div className="w-full px-4 lg:w-1/2">
-              <div className="relative mx-auto aspect-25/24 max-w-[500px] lg:mr-0">
-                <Image
-                  src="/images/about/about-image.svg"
-                  alt="about-image"
-                  fill
-                  className="mx-auto max-w-full drop-shadow-three dark:hidden dark:drop-shadow-none lg:mr-0"
-                />
-                <Image
-                  src="/images/about/about-image-dark.svg"
-                  alt="about-image"
-                  fill
-                  className="mx-auto hidden max-w-full drop-shadow-three dark:block dark:drop-shadow-none lg:mr-0"
-                />
+              <div className="group relative mx-auto aspect-25/24 max-w-125 lg:mr-0">
+                <div className="absolute inset-0 rounded-[30px] bg-linear-to-br from-cyan-400/20 via-indigo-500/10 to-purple-500/10 blur-xl opacity-70 transition-all duration-500 group-hover:opacity-100" />
+                <div className="relative overflow-hidden rounded-[28px] border border-white/20 shadow-2xl transition-transform duration-500 ease-out hover:scale-105">
+                  <Image
+                    src="/images/about/about-image.svg"
+                    alt="about-image"
+                    fill
+                    className="object-cover mx-auto max-w-full drop-shadow-three dark:hidden dark:drop-shadow-none lg:mr-0"
+                  />
+                  <Image
+                    src="/images/about/about-image-dark.svg"
+                    alt="about-image"
+                    fill
+                    className="object-cover mx-auto hidden max-w-full drop-shadow-three dark:block dark:drop-shadow-none lg:mr-0"
+                  />
+                </div>
               </div>
             </div>
           </div>

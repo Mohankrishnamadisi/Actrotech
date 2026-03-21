@@ -132,4 +132,57 @@ layer(base);
   input[type="checkbox"]:checked ~ label span svg {
     @apply inline-flex;
   }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold transition-all duration-300 ease-in-out transform text-center;
+    box-shadow: var(--shadow-btn);
+  }
+
+  .btn-primary {
+    @apply bg-linear-to-r from-blue-600 to-purple-600 text-white hover:from-blue-500 hover:to-purple-500;
+  }
+
+  .btn-secondary {
+    @apply bg-white border border-slate-300 text-slate-900 hover:bg-slate-100 dark:bg-slate-900 dark:border-slate-700 dark:text-white dark:hover:bg-slate-800;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent text-slate-700 border border-transparent hover:bg-slate-200 dark:text-slate-200 dark:hover:bg-slate-700;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 12px 24px rgba(68, 78, 102, 0.25);
+  }
+
+  .btn:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out both;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 1s ease-out both;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideUp {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
 }

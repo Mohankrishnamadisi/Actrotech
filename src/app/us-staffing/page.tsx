@@ -2,6 +2,7 @@
 
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
+import Button from '@/components/Common/Button';
 import {
   Users,
   Briefcase,
@@ -118,12 +119,12 @@ export default function USStaffingPage() {
               ActroTech provides reliable and scalable IT staffing solutions to help businesses find the right talent quickly and efficiently.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+              <Button variant="primary" className="w-full max-w-60 justify-center px-8 py-4 gap-2">
                 Hire Talent <ArrowRight size={20} />
-              </button>
-              <button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-400 dark:hover:text-gray-900">
+              </Button>
+              <Button variant="secondary" className="w-full max-w-60 justify-center px-8 py-4">
                 Contact Us
-              </button>
+              </Button>
             </div>
           </div>
           <div className="flex justify-center">
@@ -248,7 +249,7 @@ export default function USStaffingPage() {
       </section>
 
       {/* Why Choose ActroTech */}
-      <section className="py-16 lg:py-24 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
+      <section className="py-16 lg:py-24 bg-linear-to-r from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
         <div className="container mx-auto px-4">
           <SectionTitle
             title="Why Choose Us"
@@ -336,7 +337,7 @@ export default function USStaffingPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 lg:py-24 bg-gradient-to-r from-blue-600 to-purple-600">
+      <section className="py-16 lg:py-24 bg-linear-to-r from-blue-600 to-purple-600">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
             Find the Right Talent for Your Business

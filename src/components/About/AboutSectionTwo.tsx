@@ -6,26 +6,26 @@ const AboutSectionTwo = () => {
       <div className="container">
         <div className="-mx-4 flex flex-wrap items-center">
           <div className="w-full px-4 lg:w-1/2">
-            <div
-              className="relative mx-auto mb-12 aspect-25/24 max-w-[500px] text-center lg:m-0"
-              data-wow-delay=".15s"
-            >
-              <Image
-                src="/images/about/about-image-2.svg"
-                alt="about image"
-                fill
-                className="drop-shadow-three dark:hidden dark:drop-shadow-none"
-              />
-              <Image
-                src="/images/about/about-image-2-dark.svg"
-                alt="about image"
-                fill
-                className="hidden drop-shadow-three dark:block dark:drop-shadow-none"
-              />
+            <div className="group relative mx-auto mb-12 aspect-25/24 max-w-117.5 text-center lg:m-0" data-wow-delay=".15s">
+              <div className="absolute inset-0 rounded-[28px] bg-linear-to-br from-violet-500/20 via-blue-500/15 to-cyan-400/15 blur-xl opacity-70 transition-all duration-500 group-hover:opacity-100" />
+              <div className="relative overflow-hidden rounded-[26px] border border-white/20 shadow-2xl transition-transform duration-500 ease-out hover:scale-105">
+                <Image
+                  src="/images/about/about-image-2.svg"
+                  alt="about image"
+                  fill
+                  className="object-cover drop-shadow-three dark:hidden dark:drop-shadow-none"
+                />
+                <Image
+                  src="/images/about/about-image-2-dark.svg"
+                  alt="about image"
+                  fill
+                  className="object-cover hidden drop-shadow-three dark:block dark:drop-shadow-none"
+                />
+              </div>
             </div>
           </div>
           <div className="w-full px-4 lg:w-1/2">
-            <div className="max-w-[470px]">
+            <div className="max-w-117.5">
               <div className="mb-9">
                 <h3 className="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
                   Quality Assurance
