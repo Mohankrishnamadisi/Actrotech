@@ -149,23 +149,29 @@ export default function BackendServicesPage() {
   return (
     <div className={`mt-8 min-h-screen ${isDark ? 'bg-[#0B1120] text-white' : 'bg-white text-gray-900'}`}>
       {/* Hero Section - Server Architecture Theme */}
-      <section className="bg-linear-to-br from-gray-900 via-blue-900 to-gray-900 text-white py-16 lg:py-24">
+      <section className={`py-16 lg:py-24 ${isDark ? 'bg-linear-to-br from-gray-900 via-blue-900 to-gray-900 text-white' : 'bg-linear-to-br from-gray-50 via-blue-50 to-gray-50 text-gray-900'}`}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h1 className="mb-4 text-3xl font-bold leading-tight! text-white sm:text-4xl md:text-[45px]">
+            <h1 className={`mb-4 text-3xl font-bold leading-tight! sm:text-4xl md:text-[45px] ${
+              isDark ? 'text-white' : 'text-gray-900'
+            }`}>
               Backend Development Services
             </h1>
-            <p className="text-base leading-relaxed! text-gray-300 md:text-lg mb-4 max-w-2xl mx-auto">
+            <p className={`text-base leading-relaxed! md:text-lg mb-4 max-w-2xl mx-auto ${
+              isDark ? 'text-gray-300' : 'text-gray-600'
+            }`}>
               We build powerful, secure, and scalable backend systems that drive modern applications.
             </p>
-            <p className="text-base leading-relaxed! text-gray-300 md:text-lg mb-8 max-w-2xl mx-auto">
+            <p className={`text-base leading-relaxed! md:text-lg mb-8 max-w-2xl mx-auto ${
+              isDark ? 'text-gray-300' : 'text-gray-600'
+            }`}>
               Our backend solutions ensure seamless data processing, system integration, and business logic execution, enabling your applications to perform efficiently at scale.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center gap-2">
+              <button className="group relative flex rounded-lg bg-linear-to-r from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0 items-center gap-2">
                 Start Your Project <ArrowRight size={20} />
               </button>
-              <button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+              <button className="group relative flex rounded-lg border-2 border-primary bg-transparent px-6 py-3 text-base font-semibold text-primary transition-all duration-300 ease-in-out hover:bg-primary hover:text-white dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-white">
                 Contact Us
               </button>
             </div>

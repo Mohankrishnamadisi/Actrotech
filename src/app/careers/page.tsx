@@ -159,12 +159,12 @@ export default function CareersPage() {
               We are always looking for passionate developers, designers, and problem-solvers to join our growing team.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="primary" className="w-full justify-center px-8 py-4 text-base gap-2">
+              <button className="group relative flex rounded-lg bg-linear-to-r from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0 items-center gap-2">
                 View Open Positions <ArrowRight size={20} />
-              </Button>
-              <Button variant="secondary" className="w-full justify-center px-8 py-4 text-base gap-2">
+              </button>
+              <button className="group relative flex rounded-lg border-2 border-primary bg-transparent px-6 py-3 text-base font-semibold text-primary transition-all duration-300 ease-in-out hover:bg-primary hover:text-white dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-white">
                 Apply Now
-              </Button>
+              </button>
             </div>
           </div>
           <div className="flex justify-center">
