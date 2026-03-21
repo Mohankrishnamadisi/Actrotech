@@ -131,7 +131,7 @@ const benefits = [
 export default function CareersPage() {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
-  const careerImage = isDark ? '/images/new/ca-dark.png' : '/images/new/ca-dark.png';
+  const careerImage = isDark ? '/images/new/ca-dark.png' : '/images/new/ca-light.png';
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('all');
   const [isModalOpen, setIsModalOpen] = useState(false);
