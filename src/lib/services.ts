@@ -3,7 +3,7 @@ import { supabase } from './supabaseClient'
 export const subscribeToUpdates = async (email: string, name: string) => {
   const { data, error } = await supabase
     .from('subscribers')
-    .insert([{ email, name }])
+    .insert([{ email, name, created_at: new Date().toISOString() }])
 
   if (error) throw error
   return data
@@ -12,7 +12,7 @@ export const subscribeToUpdates = async (email: string, name: string) => {
 export const sendContactMessage = async (name: string, email: string, message: string) => {
   const { data, error } = await supabase
     .from('contact_messages')
-    .insert([{ name, email, message }])
+    .insert([{ name, email, message, created_at: new Date().toISOString() }])
 
   if (error) throw error
   return data
@@ -21,7 +21,7 @@ export const sendContactMessage = async (name: string, email: string, message: s
 export const applyForJob = async (name: string, email: string, phone: string, role: string, resume_url: string) => {
   const { data, error } = await supabase
     .from('job_applications')
-    .insert([{ name, email, phone, role, resume_url }])
+    .insert([{ name, email, phone, role, resume_url, created_at: new Date().toISOString() }])
 
   if (error) throw error
   return data
