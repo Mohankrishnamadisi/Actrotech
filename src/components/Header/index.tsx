@@ -27,7 +27,10 @@ const Header = () => {
     window.addEventListener("scroll", handleStickyNavbar);
   });
 
-  const { theme } = useTheme();
+  const { theme, resolvedTheme } = useTheme();
+  const activeTheme = theme === "system" ? resolvedTheme || "light" : theme || "light";
+  const logoSrc =
+    activeTheme === "light" ? "/Actro_logo dark.png" : "/Actro_logo.png";
 
   // submenu handler
   const [openIndex, setOpenIndex] = useState(-1);
@@ -37,13 +40,6 @@ const Header = () => {
     } else {
       setOpenIndex(index);
     }
-  };
-
-  const logoStyle = {
-    filter:
-      theme === "light"
-        ? "invert(24%) sepia(90%) saturate(3000%) hue-rotate(181deg) brightness(95%) contrast(90%)"
-        : "none",
   };
 
   const usePathName = usePathname();
@@ -67,12 +63,11 @@ const Header = () => {
                 } `}
               >
                 <Image
-                  src="/Actro_logo.png"
+                  src={logoSrc}
                   alt="Actrotech logo"
-                  width={140}
-                  height={30}
+                  width={160}
+                  height={40}
                   className="w-full"
-                  style={logoStyle}
                 />
               </Link>
             </div>

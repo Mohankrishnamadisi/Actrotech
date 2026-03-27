@@ -4,14 +4,10 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 
 const Footer = () => {
-  const { theme } = useTheme();
-
-  const logoStyle = {
-    filter:
-      theme === "light"
-        ? "invert(24%) sepia(90%) saturate(3000%) hue-rotate(181deg) brightness(95%) contrast(90%)"
-        : "none",
-  };
+  const { theme, resolvedTheme } = useTheme();
+  const activeTheme = theme === "system" ? resolvedTheme || "light" : theme || "light";
+  const logoSrc =
+    activeTheme === "light" ? "/Actro_logo dark.png" : "/Actro_logo.png";
 
   return (
     <>
@@ -22,12 +18,11 @@ const Footer = () => {
               <div className="mb-12 max-w-[360px] lg:mb-16">
                 <Link href="/" className="mb-8 inline-block">
                   <Image
-                    src="/Actro_logo.png"
+                    src={logoSrc}
                     alt="Actrotech logo"
                     className="w-full"
-                    width={140}
-                    height={30}
-                    style={logoStyle}
+                    width={150}
+                    height={36}
                   />
                 </Link>
                 <p className="mb-9 text-base leading-relaxed text-body-color dark:text-body-color-dark">
