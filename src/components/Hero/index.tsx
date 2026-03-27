@@ -16,19 +16,6 @@ const Hero = () => {
           : "bg-linear-to-br from-blue-50 via-indigo-100 to-cyan-50 text-gray-900"
       }`}
     >
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <video
-          src="/logo.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 h-full w-full object-cover"
-          aria-hidden="true"
-        />
-        <div className="absolute inset-0 bg-blue-900/30 dark:bg-slate-950/55" />
-      </div>
-
       <div className="pointer-events-none absolute inset-0 opacity-30">
         <div className={`absolute -left-20 top-10 h-48 w-48 rounded-full blur-3xl animate-float ${
           isDark ? "bg-cyan-400/30" : "bg-blue-400/20"
@@ -44,7 +31,7 @@ const Hero = () => {
       <div className="container relative z-10">
         <div className="mx-auto max-w-5xl px-4 text-center">
           <h1 className={`mb-6 text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl animate-fade-in ${
-            isDark ? "text-white drop-shadow-[0_10px_15px_rgba(0,0,0,0.75)]" : "text-gray-900 drop-shadow-[0_6px_12px_rgba(0,0,0,0.35)]"
+            isDark ? "text-white" : "text-gray-900"
           }`}>
             Build Future-ready Software & IT Talent with ActroTech
           </h1>
