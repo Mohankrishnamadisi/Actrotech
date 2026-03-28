@@ -4,6 +4,7 @@ import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { motion } from "framer-motion";
 import {
   Users,
   Rocket,
@@ -205,10 +206,14 @@ export default function CareersPage() {
               We are always looking for passionate developers, designers, and problem-solvers to join our growing team.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="group relative flex rounded-lg bg-linear-to-r from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0 items-center gap-2">
+              <button onClick={() => {
+    document.getElementById("openings")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }}className="group relative flex rounded-lg bg-linear-to-r from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0 items-center gap-2 cursor-pointer">
                 View Open Positions <ArrowRight size={20} />
               </button>
-              <button className="group relative flex rounded-lg border-2 border-primary bg-transparent px-6 py-3 text-base font-semibold text-primary transition-all duration-300 ease-in-out hover:bg-primary hover:text-white dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-white" onClick={handleApplyClick}>
+              <button className="group relative flex rounded-lg border-2 cursor-pointer border-primary bg-transparent px-6 py-3 text-base font-semibold text-primary transition-all duration-300 ease-in-out hover:bg-primary hover:text-white dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-white" onClick={handleApplyClick}>
                 Apply Now
               </button>
             </div>
@@ -257,7 +262,7 @@ export default function CareersPage() {
       </section>
 
       {/* Job Openings */}
-      <section className="py-16 lg:py-24 bg-gray-50 dark:bg-gray-900/50">
+      <section id="openings" className="py-16 lg:py-24 bg-gray-50 dark:bg-gray-900/50">
         <div className="container mx-auto px-4">
           <SectionTitle
             title="Current Openings"
@@ -383,7 +388,7 @@ export default function CareersPage() {
                       ))}
                     </div>
                   </div>
-                  <Button onClick={handleApplyClick} variant="primary" className="w-full justify-center py-3 text-sm gap-2">
+                  <Button onClick={handleApplyClick} variant="primary" className="w-full justify-center py-3 text-sm gap-2 cursor-pointer">
                     Apply Now <ArrowRight size={16} />
                   </Button>
                 </div>
@@ -533,10 +538,10 @@ export default function CareersPage() {
             We're always looking for talented individuals to join our mission.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button onClick={handleApplyClick} className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1 mx-auto">
+            <button onClick={handleApplyClick} className="bg-white text-blue-600 cursor-pointer hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1 mx-auto">
               Apply Now <ArrowRight size={20} />
             </button>
-            <button className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg font-semibold transition-all duration-300 mx-auto">
+            <button className="border-2 border-white text-white cursor-pointer hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg font-semibold transition-all duration-300 mx-auto">
               Contact HR
             </button>
           </div>

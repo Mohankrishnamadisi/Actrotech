@@ -172,12 +172,12 @@ export default function ProductsPage() {
                 Join thousands of businesses that trust ActroTech products for their digital transformation journey.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors cursor-pointer">
                   Get Started
                 </button>
-                <button className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold transition-colors">
+                <a href="/contact" className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold transition-colors cursor-pointer">
                   Contact Us
-                </button>
+                </a>
               </div>
             </div>
             <div className="flex justify-center">

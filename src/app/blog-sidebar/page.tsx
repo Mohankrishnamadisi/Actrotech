@@ -43,9 +43,9 @@ const BlogSidebarPage = () => {
                     </div>
                   </div>
                   <div className="mb-5">
-                    <button className="bg-primary inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90 transition-colors">
+                    <a href="/products" className="bg-primary inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90 transition-colors">
                       View Product
-                    </button>
+                    </a>
                   </div>
                 </div>
                 <div>
