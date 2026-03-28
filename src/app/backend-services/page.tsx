@@ -219,7 +219,7 @@ export default function BackendServicesPage() {
         </div>
       </section>
 
-      {/* What We Offer */}
+      {/* What We a Offer */}
       <section id="offers" className="container mx-auto px-4 py-16">
         <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">What We Offer</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
