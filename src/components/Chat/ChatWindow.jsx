@@ -41,22 +41,44 @@ export default function ChatWindow({ onClose }) {
     botReply(option.key);
   };
 
-  const handleSubmit = e => {
+  const callGemini = async message => {
+    setIsTyping(true);
+    try {
+      const res = await fetch("/api/gemini", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message }),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.text) {
+        throw new Error(data?.error || "No response from Gemini");
+      }
+
+      addMessage("bot", data.text);
+    } catch (error) {
+      console.error("Gemini request failed:", error);
+      addMessage("bot", "Could not fetch Gemini response. Please try again later.");
+    } finally {
+      setIsTyping(false);
+    }
+  };
+
+  const handleSubmit = async e => {
     e.preventDefault();
     const trimmed = input.trim();
     if (!trimmed) return;
     addMessage("user", trimmed);
 
     const lower = trimmed.toLowerCase();
-    const matched = options.find(o => lower.includes(o.label.toLowerCase()) || lower.includes(o.key.replace("_", " ")));
+    const matched = options.find(
+      o => lower.includes(o.label.toLowerCase()) || lower.includes(o.key.replace("_", " "))
+    );
+
     if (matched) {
       botReply(matched.key);
     } else {
-      setIsTyping(true);
-      setTimeout(() => {
-        setIsTyping(false);
-        addMessage("bot", "Please select an option or contact support");
-      }, 700);
+      await callGemini(trimmed);
     }
 
     setInput("");
