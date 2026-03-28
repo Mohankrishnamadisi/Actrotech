@@ -41,24 +41,24 @@ export default function ChatWindow({ onClose }) {
     botReply(option.key);
   };
 
-  const callGemini = async message => {
+  const callSupabaseAI = async message => {
     setIsTyping(true);
     try {
-      const res = await fetch("/api/gemini", {
+      const res = await fetch("https://rvqeobhdexknhffnqbmy.supabase.co/functions/v1/bright-action", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message }),
       });
 
       const data = await res.json();
-      if (!res.ok || !data.text) {
-        throw new Error(data?.error || "No response from Gemini");
+      if (!res.ok || !data?.data?.reply) {
+        throw new Error("No response from Supabase Edge Function");
       }
 
-      addMessage("bot", data.text);
+      addMessage("bot", data.data.reply);
     } catch (error) {
-      console.error("Gemini request failed:", error);
-      addMessage("bot", "Could not fetch Gemini response. Please try again later.");
+      console.error("Supabase Edge Function request failed:", error);
+      addMessage("bot", "Unable to fetch response");
     } finally {
       setIsTyping(false);
     }
@@ -78,7 +78,7 @@ export default function ChatWindow({ onClose }) {
     if (matched) {
       botReply(matched.key);
     } else {
-      await callGemini(trimmed);
+      await callSupabaseAI(trimmed);
     }
 
     setInput("");
