@@ -64,24 +64,157 @@ const whyWorkWithUs = [
 
 const newOpenings = [
   {
-    title: 'Frontend Developer (React / Vue)',
+    title: 'Frontend Developer (React / Next.js)',
     experience: '2–5 years',
     location: 'Remote / Hybrid',
-    skills: ['HTML', 'CSS', 'JavaScript', 'React/Vue', 'TypeScript'],
+    skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Next.js', 'TypeScript'],
     isNew: true,
   },
   {
-    title: 'Backend Developer (.NET / Node.js)',
-    experience: '3–6 years',
-    location: 'Remote / Hybrid',
-    skills: ['C#', 'Node.js', 'API Development', 'Databases', 'Microservices'],
-    isNew: true,
-  },
-  {
-    title: 'Full Stack Developer',
+    title: 'Backend Developer (Node.js / Express)',
     experience: '3–7 years',
     location: 'Remote / Hybrid',
-    skills: ['React', 'Node.js', 'Databases', 'Cloud', 'DevOps'],
+    skills: ['Node.js', 'Express', 'MongoDB', 'REST APIs', 'JWT'],
+    isNew: true,
+  },
+  {
+    title: 'Full Stack Developer (MERN Stack)',
+    experience: '4–8 years',
+    location: 'Remote / Hybrid',
+    skills: ['React', 'Node.js', 'MongoDB', 'Express', 'Redux'],
+    isNew: true,
+  },
+  {
+    title: 'Angular Developer',
+    experience: '3–6 years',
+    location: 'Remote / Hybrid',
+    skills: ['Angular', 'TypeScript', 'RxJS', 'NgRx', 'REST APIs'],
+    isNew: true,
+  },
+  {
+    title: 'Java Developer (Spring Boot)',
+    experience: '5–10 years',
+    location: 'Remote / Hybrid',
+    skills: ['Java', 'Spring Boot', 'Microservices', 'Hibernate', 'MySQL'],
+    isNew: true,
+  },
+  {
+    title: '.NET Developer',
+    experience: '4–9 years',
+    location: 'Remote / Hybrid',
+    skills: ['C#', '.NET Core', 'Web API', 'SQL Server', 'Azure'],
+    isNew: true,
+  },
+  {
+    title: 'DevOps Engineer',
+    experience: '3–8 years',
+    location: 'Remote / Hybrid',
+    skills: ['Docker', 'Kubernetes', 'CI/CD', 'AWS', 'Terraform'],
+    isNew: true,
+  },
+  {
+    title: 'Cloud Engineer (AWS / Azure)',
+    experience: '5–12 years',
+    location: 'Remote / Hybrid',
+    skills: ['AWS', 'Azure', 'Cloud Architecture', 'Networking', 'Security'],
+    isNew: true,
+  },
+  {
+    title: 'Data Engineer',
+    experience: '4–10 years',
+    location: 'Remote / Hybrid',
+    skills: ['Python', 'ETL', 'Spark', 'SQL', 'Data Pipelines'],
+    isNew: true,
+  },
+  {
+    title: 'AI/ML Engineer',
+    experience: '3–9 years',
+    location: 'Remote / Hybrid',
+    skills: ['Python', 'Machine Learning', 'TensorFlow', 'NLP', 'Deep Learning'],
+    isNew: true,
+  },
+  {
+    title: 'QA Automation Engineer',
+    experience: '2–6 years',
+    location: 'Remote / Hybrid',
+    skills: ['Selenium', 'Cypress', 'JavaScript', 'Test Automation', 'CI/CD'],
+    isNew: true,
+  },
+  {
+    title: 'Mobile App Developer (Flutter / React Native)',
+    experience: '2–7 years',
+    location: 'Remote / Hybrid',
+    skills: ['Flutter', 'React Native', 'Dart', 'API Integration', 'UI Design'],
+    isNew: true,
+  },
+  {
+    title: 'Backend Developer (Java / Spring Boot)',
+    experience: '6–12 years',
+    location: 'Remote / Hybrid',
+    skills: ['Java', 'Spring Boot', 'Microservices', 'Kafka', 'PostgreSQL'],
+    isNew: true,
+  },
+  {
+    title: 'Backend Developer (Python / Django)',
+    experience: '3–8 years',
+    location: 'Remote / Hybrid',
+    skills: ['Python', 'Django', 'REST APIs', 'PostgreSQL', 'Redis'],
+    isNew: true,
+  },
+  {
+    title: 'Full Stack Developer (React + Java)',
+    experience: '5–11 years',
+    location: 'Remote / Hybrid',
+    skills: ['React', 'Java', 'Spring Boot', 'MySQL', 'Docker'],
+    isNew: true,
+  },
+  {
+    title: 'Full Stack Developer (Angular + .NET)',
+    experience: '4–9 years',
+    location: 'Remote / Hybrid',
+    skills: ['Angular', '.NET Core', 'C#', 'SQL Server', 'Azure'],
+    isNew: true,
+  },
+  {
+    title: 'Backend Developer (Go / Microservices)',
+    experience: '5–13 years',
+    location: 'Remote / Hybrid',
+    skills: ['Golang', 'Microservices', 'gRPC', 'Docker', 'Kubernetes'],
+    isNew: true,
+  },
+  {
+    title: 'Data Engineer (Big Data)',
+    experience: '6–14 years',
+    location: 'Remote / Hybrid',
+    skills: ['Spark', 'Hadoop', 'Kafka', 'Scala', 'Data Pipelines'],
+    isNew: true,
+  },
+  {
+    title: 'Cloud Engineer (AWS DevOps)',
+    experience: '4–10 years',
+    location: 'Remote / Hybrid',
+    skills: ['AWS', 'CI/CD', 'Terraform', 'Docker', 'Monitoring'],
+    isNew: true,
+  },
+  {
+    title: 'Full Stack Developer (Node.js + React)',
+    experience: '2–6 years',
+    location: 'Remote / Hybrid',
+    skills: ['Node.js', 'React', 'MongoDB', 'Express', 'JWT'],
+    isNew: true,
+  },
+  {
+    title: 'Backend Developer (Ruby on Rails)',
+    experience: '3–9 years',
+    location: 'Remote / Hybrid',
+    skills: ['Ruby', 'Rails', 'PostgreSQL', 'REST APIs', 'Sidekiq'],
+    isNew: true,
+  },
+  {
+    title: 'Data Engineer (Python / ETL)',
+    experience: '2–7 years',
+    location: 'Remote / Hybrid',
+    skills: ['Python', 'ETL', 'SQL', 'Airflow', 'Data Warehousing'],
     isNew: true,
   },
 ];
@@ -135,6 +268,7 @@ export default function CareersPage() {
   const careerImage = isDark ? '/images/new/ca-dark.png' : '/images/new/ca-light.png';
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('all');
+  const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [applicationForm, setApplicationForm] = useState({
     name: '',
@@ -145,15 +279,36 @@ export default function CareersPage() {
   });
   const [loading, setLoading] = useState(false);
 
-  const filteredJobs = newOpenings.filter(job => {
-    const matchesSearch = job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         job.skills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase()));
-    const matchesFilter = filterType === 'all' ||
-                         (filterType === 'frontend' && job.title.toLowerCase().includes('frontend')) ||
-                         (filterType === 'backend' && job.title.toLowerCase().includes('backend')) ||
-                         (filterType === 'fullstack' && job.title.toLowerCase().includes('full stack'));
-    return matchesSearch && matchesFilter;
-  });
+  const categories = [
+    { value: 'all', label: 'All Categories' },
+    { value: 'frontend', label: 'Frontend' },
+    { value: 'backend', label: 'Backend' },
+    { value: 'full stack', label: 'Full Stack' },
+    { value: 'devops', label: 'DevOps' },
+    { value: 'cloud', label: 'Cloud' },
+    { value: 'data', label: 'Data' },
+    { value: 'ai/ml', label: 'AI/ML' },
+    { value: 'mobile', label: 'Mobile' },
+  ];
+
+  const matchesSearch = (job: typeof newOpenings[number]) => {
+    const normalized = searchTerm.toLowerCase();
+    return (
+      job.title.toLowerCase().includes(normalized) ||
+      job.location.toLowerCase().includes(normalized) ||
+      job.skills.some(skill => skill.toLowerCase().includes(normalized))
+    );
+  };
+
+  const matchesFilter = (job: typeof newOpenings[number]) => {
+    if (filterType === 'all') return true;
+    return job.title.toLowerCase().includes(filterType.toLowerCase());
+  };
+
+  const filteredJobs = newOpenings.filter(job => matchesSearch(job) && matchesFilter(job));
+  const jobsPerPage = 6;
+  const totalPages = Math.max(1, Math.ceil(filteredJobs.length / jobsPerPage));
+  const currentJobs = filteredJobs.slice((currentPage - 1) * jobsPerPage, currentPage * jobsPerPage);
 
   const handleApplyClick = () => {
     setIsModalOpen(true);
@@ -273,127 +428,139 @@ export default function CareersPage() {
           {/* Search and Filter */}
           <div className="flex flex-col md:flex-row gap-4 mb-12 max-w-4xl mx-auto">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Search jobs..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className={`w-full pl-10 pr-4 py-3 rounded-lg border transition-colors ${
-                  isDark
-                    ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:border-blue-500'
-                    : 'bg-white border-gray-300 focus:border-blue-500'
-                }`}
-              />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  type="text"
+                  placeholder="Search jobs..."
+                  value={searchTerm}
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                    setCurrentPage(1);
+                  }}
+                  className={`w-full pl-10 pr-4 py-3 rounded-lg border transition-colors ${
+                    isDark
+                      ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:border-blue-500'
+                      : 'bg-white border-gray-300 focus:border-blue-500'
+                  }`}
+                />
+              </div>
+              <div className="w-full md:w-64">
+                <label htmlFor="categoryFilter" className="sr-only">Filter category</label>
+                <select
+                  id="categoryFilter"
+                  value={filterType}
+                  onChange={(e) => {
+                    setFilterType(e.target.value);
+                    setCurrentPage(1);
+                  }}
+                  className={`w-full rounded-lg border px-4 py-3 text-sm transition-colors ${
+                    isDark
+                      ? 'bg-gray-800 border-gray-700 text-white focus:border-blue-500'
+                      : 'bg-white border-gray-300 text-gray-900 focus:border-blue-500'
+                  }`}
+                >
+                  {categories.map((category) => (
+                    <option key={category.value} value={category.value}>
+                      {category.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
-            <div className="flex gap-2">
-              <button
-                onClick={() => setFilterType('all')}
-                className={`px-4 py-3 rounded-lg font-medium transition-colors ${
-                  filterType === 'all'
-                    ? 'bg-blue-600 text-white'
-                    : isDark
-                    ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }`}
-              >
-                All
-              </button>
-              <button
-                onClick={() => setFilterType('frontend')}
-                className={`px-4 py-3 rounded-lg font-medium transition-colors ${
-                  filterType === 'frontend'
-                    ? 'bg-blue-600 text-white'
-                    : isDark
-                    ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }`}
-              >
-                Frontend
-              </button>
-              <button
-                onClick={() => setFilterType('backend')}
-                className={`px-4 py-3 rounded-lg font-medium transition-colors ${
-                  filterType === 'backend'
-                    ? 'bg-blue-600 text-white'
-                    : isDark
-                    ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }`}
-              >
-                Backend
-              </button>
-              <button
-                onClick={() => setFilterType('fullstack')}
-                className={`px-4 py-3 rounded-lg font-medium transition-colors ${
-                  filterType === 'fullstack'
-                    ? 'bg-blue-600 text-white'
-                    : isDark
-                    ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }`}
-              >
-                Full Stack
-              </button>
-            </div>
-          </div>
-
           {/* New Openings */}
           <div className="mb-16">
             <h3 className="text-2xl font-bold mb-8 text-center flex items-center justify-center gap-2">
               <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
               New Openings
             </h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredJobs.map((job, index) => (
-                <div
-                  key={index}
-                  className={`p-6 rounded-xl transition-all duration-300 hover:transform hover:scale-105 hover:shadow-2xl border-2 ${
-                    isDark
-                      ? 'bg-gray-800/50 border-gray-700 hover:border-green-500'
-                      : 'bg-white border-gray-200 hover:border-green-400 shadow-lg'
-                  }`}
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className={`p-2 rounded-lg ${isDark ? 'bg-green-600/20' : 'bg-green-100'}`}>
-                      <Briefcase className={`w-6 h-6 ${isDark ? 'text-green-400' : 'text-green-600'}`} />
+
+            {currentJobs.length === 0 ? (
+              <div className="rounded-3xl border border-dashed border-gray-300 bg-white/70 px-8 py-16 text-center text-gray-600 dark:border-gray-700 dark:bg-gray-900/70 dark:text-gray-300">
+                <p className="text-xl font-semibold mb-2">No jobs found</p>
+                <p className="max-w-xl mx-auto text-sm leading-6">
+                  Try a different keyword or category to discover more opportunities.
+                </p>
+              </div>
+            ) : (
+              <>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {currentJobs.map((job, index) => (
+                    <div
+                      key={index}
+                      className={`p-6 rounded-xl transition-all duration-300 hover:transform hover:scale-105 hover:shadow-2xl border-2 ${
+                        isDark
+                          ? 'bg-gray-800/50 border-gray-700 hover:border-green-500'
+                          : 'bg-white border-gray-200 hover:border-green-400 shadow-lg'
+                      }`}
+                    >
+                      <div className="flex items-start justify-between mb-4">
+                        <div className={`p-2 rounded-lg ${isDark ? 'bg-green-600/20' : 'bg-green-100'}`}>
+                          <Briefcase className={`w-6 h-6 ${isDark ? 'text-green-400' : 'text-green-600'}`} />
+                        </div>
+                        {job.isNew && (
+                          <span className="bg-green-500 text-white text-xs px-2 py-1 rounded-full font-medium">
+                            NEW
+                          </span>
+                        )}
+                      </div>
+                      <h4 className="text-xl font-semibold mb-3">{job.title}</h4>
+                      <div className="space-y-2 mb-4">
+                        <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                          <Clock className="w-4 h-4" />
+                          {job.experience}
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                          <MapPin className="w-4 h-4" />
+                          {job.location}
+                        </div>
+                      </div>
+                      <div className="mb-4">
+                        <p className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Skills:</p>
+                        <div className="flex flex-wrap gap-2">
+                          {job.skills.map((skill, skillIndex) => (
+                            <span
+                              key={skillIndex}
+                              className={`text-xs px-2 py-1 rounded-full ${
+                                isDark ? 'bg-blue-600/20 text-blue-400' : 'bg-blue-100 text-blue-700'
+                              }`}
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <Button onClick={handleApplyClick} variant="primary" className="w-full justify-center py-3 text-sm gap-2 cursor-pointer">
+                        Apply Now <ArrowRight size={16} />
+                      </Button>
                     </div>
-                    <span className="bg-green-500 text-white text-xs px-2 py-1 rounded-full font-medium">
-                      NEW
-                    </span>
-                  </div>
-                  <h4 className="text-xl font-semibold mb-3">{job.title}</h4>
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                      <Clock className="w-4 h-4" />
-                      {job.experience}
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                      <MapPin className="w-4 h-4" />
-                      {job.location}
-                    </div>
-                  </div>
-                  <div className="mb-4">
-                    <p className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Skills:</p>
-                    <div className="flex flex-wrap gap-2">
-                      {job.skills.map((skill, skillIndex) => (
-                        <span
-                          key={skillIndex}
-                          className={`text-xs px-2 py-1 rounded-full ${
-                            isDark ? 'bg-blue-600/20 text-blue-400' : 'bg-blue-100 text-blue-700'
+                  ))}
+                </div>
+
+                {totalPages > 1 && (
+                  <div className="mt-10 flex flex-wrap justify-center gap-3">
+                    {Array.from({ length: totalPages }, (_, pageIndex) => {
+                      const pageNumber = pageIndex + 1;
+                      return (
+                        <button
+                          key={pageNumber}
+                          type="button"
+                          onClick={() => setCurrentPage(pageNumber)}
+                          className={`min-w-[44px] rounded-xl border px-4 py-2 text-sm font-medium transition ${
+                            currentPage === pageNumber
+                              ? 'bg-blue-600 text-white border-blue-600'
+                              : isDark
+                              ? 'bg-gray-800 border-gray-700 text-gray-300 hover:bg-gray-700'
+                              : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-100'
                           }`}
                         >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
+                          {pageNumber}
+                        </button>
+                      );
+                    })}
                   </div>
-                  <Button onClick={handleApplyClick} variant="primary" className="w-full justify-center py-3 text-sm gap-2 cursor-pointer">
-                    Apply Now <ArrowRight size={16} />
-                  </Button>
-                </div>
-              ))}
-            </div>
+                )}
+              </>
+            )}
           </div>
 
           {/* Previous Openings */}
