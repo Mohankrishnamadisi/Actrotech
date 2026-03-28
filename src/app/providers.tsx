@@ -25,10 +25,7 @@ function ScrollAnimator() {
     );
 
     const elements = Array.from(document.querySelectorAll<HTMLElement>('[data-animate]'));
-    elements.forEach((el) => {
-      el.classList.add('opacity-0');
-      observer.observe(el);
-    });
+    elements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
   }, []);

@@ -168,7 +168,11 @@ export default function BackendServicesPage() {
               Our backend solutions ensure seamless data processing, system integration, and business logic execution, enabling your applications to perform efficiently at scale.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="group relative flex rounded-lg bg-linear-to-r cursor-pointer from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0 items-center gap-2">
+              <button onClick={() => {
+    document.getElementById("offers")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }}className="group relative flex rounded-lg bg-linear-to-r cursor-pointer from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0 items-center gap-2">
                 Start Your Project <ArrowRight size={20} />
               </button>
               <a href="/contact" className="group relative flex rounded-lg border-2 border-primary bg-transparent px-6 py-3 text-base font-semibold text-primary transition-all duration-300 ease-in-out hover:bg-primary hover:text-white dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-white">
@@ -179,7 +183,7 @@ export default function BackendServicesPage() {
           
           {/* Server Architecture Visualization */}
           <div className="flex justify-center">
-            <div className="grid grid-cols-3 gap-8 items-center">
+            <div  className="grid grid-cols-3 gap-8 items-center">
               <div className="text-center">
                 <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-2">
                   <Database size={32} className="text-white" />
@@ -216,7 +220,7 @@ export default function BackendServicesPage() {
       </section>
 
       {/* What We Offer */}
-      <section className="container mx-auto px-4 py-16">
+      <section id="offers" className="container mx-auto px-4 py-16">
         <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">What We Offer</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {whatWeOffer.map((offer, idx) => {
@@ -359,9 +363,9 @@ export default function BackendServicesPage() {
             <button className="bg-white cursor-pointer text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
               Get Started
             </button>
-            <button className="border-2 cursor-pointer border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold transition-colors">
+            <a href="/contact" className="border-2 cursor-pointer border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold transition-colors">
               Contact Us
-            </button>
+            </a>
           </div>
         </div>
       </section>

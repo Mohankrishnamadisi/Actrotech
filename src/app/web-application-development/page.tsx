@@ -137,7 +137,11 @@ export default function WebApplicationDevelopmentPage() {
             From startups to enterprise platforms, we deliver robust web applications that are fast, reliable, and user-friendly.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <button className="bg-blue-600 hover:bg-blue-700 cursor-pointer text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center gap-2">
+            <button onClick={() => {
+    document.getElementById("web-dev-features")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }} className="bg-blue-600 hover:bg-blue-700 cursor-pointer text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center gap-2">
               Start Your Project <ArrowRight size={20} />
             </button>
             <a href="/contact" className="group relative flex rounded-lg border-2 border-primary bg-transparent px-6 py-3 text-base font-semibold text-primary transition-all duration-300 ease-in-out hover:bg-primary hover:text-white dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-white">

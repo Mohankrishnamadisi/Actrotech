@@ -180,7 +180,11 @@ export default function MaintenanceSupportPage() {
                 Our dedicated maintenance and support services help you minimize downtime, fix issues quickly, and keep your systems up-to-date with the latest technologies.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="group relative flex rounded-lg bg-linear-to-r from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0 items-center gap-2">
+                <button onClick={() => {
+    document.getElementById("offers")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }}className="group relative flex rounded-lg bg-linear-to-r from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0 items-center gap-2 cursor-pointer">
                   Get Support <ArrowRight size={20} />
                 </button>
                 <a href="/contact" className="group relative flex rounded-lg border-2 border-primary bg-transparent px-6 py-3 text-base font-semibold text-primary transition-all duration-300 ease-in-out hover:bg-primary hover:text-white dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-white">
@@ -225,7 +229,7 @@ export default function MaintenanceSupportPage() {
       </section>
 
       {/* What We Offer */}
-      <section className="container mx-auto px-4 py-16">
+      <section id="offers" className="container mx-auto px-4 py-16">
         <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">What We Offer</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {whatWeOffer.map((offer, idx) => {
@@ -377,12 +381,12 @@ export default function MaintenanceSupportPage() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px]">Keep Your Applications Running Smoothly with ActroTech</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+            <button className="bg-white cursor-pointer text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
               Get Support
             </button>
-            <button className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold transition-colors">
+            <a href="/contact" className="border-2 cursor-pointer border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold transition-colors">
               Contact Us
-            </button>
+            </a>
           </div>
         </div>
       </section>
