@@ -139,7 +139,11 @@ export default function UIDevelopmentPage() {
               We design and build modern, responsive, and high-performance user interfaces that deliver exceptional user experiences.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="group relative flex rounded-lg bg-linear-to-r from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0 items-center gap-2">
+              <button onClick={() => {
+    document.getElementById("products")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }}className="group relative flex rounded-lg bg-linear-to-r cursor-pointer from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0 items-center gap-2">
                 Get Started <ArrowRight size={20} />
               </button>
                <a href="/contact" className="group relative flex rounded-lg border-2 border-primary bg-transparent px-6 py-3 text-base font-semibold text-primary transition-all duration-300 ease-in-out hover:bg-primary hover:text-white dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-white">
@@ -151,7 +155,7 @@ export default function UIDevelopmentPage() {
       </section>
 
       {/* What We Offer - Timeline Style */}
-      <section className="bg-gray-50 dark:bg-gray-900 py-16">
+      <section id='products'className="bg-gray-50 dark:bg-gray-900 py-16">
         <div className="container mx-auto px-4">
           <h2 className="mb-12 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px] text-center">What We Offer</h2>
           <div className="max-w-4xl mx-auto">
@@ -281,12 +285,12 @@ export default function UIDevelopmentPage() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px]">Let's Build Stunning User Interfaces Together</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+            <button className="bg-white cursor-pointer text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
               Start Your Project
             </button>
-            <button className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold transition-colors">
+            <a href="/contact" className="border-2 cursor-pointer border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold transition-colors">
               Contact Us
-            </button>
+            </a>
           </div>
         </div>
       </section>

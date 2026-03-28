@@ -1,5 +1,6 @@
 import AboutSectionOne from "@/components/About/AboutSectionOne";
 import AboutSectionTwo from "@/components/About/AboutSectionTwo";
+import AnimatedSection from "@/components/Common/AnimatedSection";
 import Blog from "@/components/Blog";
 import Brands from "@/components/Brands";
 import ScrollUp from "@/components/Common/ScrollUp";
@@ -21,16 +22,36 @@ export default function Home() {
   return (
     <>
       <ScrollUp />
-      <Hero />
-      <Features />
-      <Video />
-      <Brands />
-      <AboutSectionOne />
-      <AboutSectionTwo />
-      <Testimonials />
-      <Pricing />
-      <Blog />
-      <Contact />
+      <AnimatedSection from="up">
+        <Hero />
+      </AnimatedSection>
+      <AnimatedSection from="left" delay={0.08}>
+        <Features />
+      </AnimatedSection>
+      <AnimatedSection from="right" delay={0.16}>
+        <Video />
+      </AnimatedSection>
+      <AnimatedSection from="scale" delay={0.24}>
+        <Brands />
+      </AnimatedSection>
+      <AnimatedSection from="left" delay={0.32}>
+        <AboutSectionOne />
+      </AnimatedSection>
+      <AnimatedSection from="right" delay={0.4}>
+        <AboutSectionTwo />
+      </AnimatedSection>
+      <AnimatedSection from="left" delay={0.48}>
+        <Testimonials />
+      </AnimatedSection>
+      <AnimatedSection from="right" delay={0.56}>
+        <Pricing />
+      </AnimatedSection>
+      <AnimatedSection from="up" delay={0.64}>
+        <Blog />
+      </AnimatedSection>
+      <AnimatedSection from="left" delay={0.72}>
+        <Contact />
+      </AnimatedSection>
     </>
   );
 }

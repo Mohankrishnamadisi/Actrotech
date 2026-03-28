@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import Image from "next/image";
 import SectionTitle from "../Common/SectionTitle";
 
@@ -8,7 +11,7 @@ const checkIcon = (
 );
 
 const AboutSectionOne = () => {
-  const List = ({ text }) => (
+  const List = ({ text }: { text: string }) => (
     <p className="text-body-color mb-5 flex items-center text-lg font-medium">
       <span className="bg-primary/10 text-primary mr-4 flex h-7.5 w-7.5 items-center justify-center rounded-md">
         {checkIcon}
@@ -22,17 +25,20 @@ const AboutSectionOne = () => {
       <div className="container">
         <div className="border-b border-body-color/15 pb-16 dark:border-white/15 md:pb-20 lg:pb-28">
           <div className="-mx-4 flex flex-wrap items-center">
-            <div className="w-full px-4 lg:w-1/2">
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="w-full px-4 lg:w-1/2"
+            >
               <SectionTitle
                 title="About Actrotech – Your Technology Partner"
                 paragraph="Actrotech Tech Solutions Pvt Ltd is a trusted IT partner delivering high-quality software solutions and staffing services to global clients. We specialize in custom software development, product engineering, cloud solutions, IT staffing, and third-party vendor services."
                 mb="44px"
               />
 
-              <div
-                className="mb-12 max-w-142.5 lg:mb-0"
-                data-wow-delay=".15s"
-              >
+              <div className="mb-12 max-w-142.5 lg:mb-0" data-wow-delay=".15s">
                 <div className="-mx-3 flex flex-wrap">
                   <div className="w-full px-3 sm:w-1/2 lg:w-full xl:w-1/2">
                     <List text="Custom Software Development" />
@@ -47,9 +53,15 @@ const AboutSectionOne = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="w-full px-4 lg:w-1/2">
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+              className="w-full px-4 lg:w-1/2"
+            >
               <div className="group relative mx-auto aspect-25/24 max-w-125 lg:mr-0">
                 <div className="absolute inset-0 rounded-[30px] bg-linear-to-br from-cyan-400/20 via-indigo-500/10 to-purple-500/10 blur-xl opacity-70 transition-all duration-500 group-hover:opacity-100" />
                 <div className="relative overflow-hidden rounded-[28px] border border-white/20 shadow-2xl transition-transform duration-500 ease-out hover:scale-105">
@@ -70,7 +82,7 @@ const AboutSectionOne = () => {
                   />
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

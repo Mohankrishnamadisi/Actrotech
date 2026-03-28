@@ -119,7 +119,11 @@ export default function USStaffingPage() {
               ActroTech provides reliable and scalable IT staffing solutions to help businesses find the right talent quickly and efficiently.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="group relative flex rounded-lg bg-linear-to-r from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0 items-center gap-2">
+              <button onClick={() => {
+    document.getElementById("offers")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }} className="group relative flex rounded-lg bg-linear-to-r from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0 items-center gap-2 cursor-pointer">
                 Hire Talent <ArrowRight size={20} />
               </button>
              <a href="/contact" className="group relative flex rounded-lg border-2 border-primary bg-transparent px-6 py-3 text-base font-semibold text-primary transition-all duration-300 ease-in-out hover:bg-primary hover:text-white dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-white">
@@ -159,7 +163,7 @@ export default function USStaffingPage() {
       </section>
 
       {/* Our Staffing Services */}
-      <section className="py-16 lg:py-24">
+      <section id='offers' className="py-16 lg:py-24">
         <div className="container mx-auto px-4">
           <SectionTitle
             title="Our Staffing Solutions"
@@ -349,9 +353,9 @@ export default function USStaffingPage() {
             <button className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1 mx-auto">
               Hire Now <ArrowRight size={20} />
             </button>
-            <button className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg font-semibold transition-all duration-300 mx-auto">
+            <a href="/contact" className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg font-semibold transition-all duration-300 mx-auto">
               Contact Us
-            </button>
+            </a>
           </div>
         </div>
       </section>
