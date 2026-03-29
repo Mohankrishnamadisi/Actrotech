@@ -265,7 +265,7 @@ export default function CareersPage() {
 
       if (uploadError) {
         console.error('Resume upload failed', uploadError);
-        toast.error('Resume upload failed. Please try again.');
+        showError('Resume upload failed. Please try again.');
         return;
       }
 
@@ -274,14 +274,14 @@ export default function CareersPage() {
       const { data: publicData } = await supabase.storage.from('resumes').getPublicUrl(filePath);
       if (!publicData?.publicUrl) {
         console.error('Failed to get public URL', publicData);
-        toast.error('Could not generate resume URL. Please try again.');
+        showError('Could not generate resume URL. Please try again.');
         return;
       }
 
       const resumeUrl = publicData.publicUrl;
       if (!resumeUrl) {
         console.error('Could not get public URL from storage', publicData);
-        toast.error('Could not generate resume URL. Please try again.');
+        showError('Could not generate resume URL. Please try again.');
         return;
       }
 
@@ -712,10 +712,11 @@ export default function CareersPage() {
                     name="name"
                     value={applicationForm.name}
                     onChange={handleFormChange}
-                    className={`w-full rounded-xl border px-4 py-3 text-sm text-slate-900 shadow-sm transition-all duration-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 ${isDark ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400' : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'}`}
+                    className={`w-full rounded-xl border px-4 py-3 text-sm shadow-sm transition-all duration-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 ${isDark ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400' : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'}`}
                     required
                   />
                 </div>
+
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-200">Email</label>
                   <input
@@ -723,10 +724,11 @@ export default function CareersPage() {
                     name="email"
                     value={applicationForm.email}
                     onChange={handleFormChange}
-                    className={`w-full rounded-xl border px-4 py-3 text-sm text-slate-900 shadow-sm transition-all duration-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 ${isDark ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400' : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'}`}
+                    className={`w-full rounded-xl border px-4 py-3 text-sm shadow-sm transition-all duration-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 ${isDark ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400' : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'}`}
                     required
                   />
                 </div>
+
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-200">Phone</label>
                   <input
@@ -734,10 +736,11 @@ export default function CareersPage() {
                     name="phone"
                     value={applicationForm.phone}
                     onChange={handleFormChange}
-                    className={`w-full rounded-xl border px-4 py-3 text-sm text-slate-900 shadow-sm transition-all duration-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 ${isDark ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400' : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'}`}
+                    className={`w-full rounded-xl border px-4 py-3 text-sm shadow-sm transition-all duration-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 ${isDark ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400' : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'}`}
                     required
                   />
                 </div>
+
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-200">Role</label>
                   <input
@@ -745,10 +748,11 @@ export default function CareersPage() {
                     name="role"
                     value={applicationForm.role}
                     onChange={handleFormChange}
-                    className={`w-full rounded-xl border px-4 py-3 text-sm text-slate-900 shadow-sm transition-all duration-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 ${isDark ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400' : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'}`}
+                    className={`w-full rounded-xl border px-4 py-3 text-sm shadow-sm transition-all duration-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 ${isDark ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400' : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'}`}
                     required
                   />
                 </div>
+
                 <div className="mb-6">
                   <label className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-200">Resume (PDF/DOC/DOCX)</label>
                   <input
@@ -758,27 +762,29 @@ export default function CareersPage() {
                       const file = e.target.files?.[0] ?? null;
                       setResumeFile(file);
                     }}
-                    className={`w-full rounded-xl border px-4 py-3 text-sm text-slate-900 shadow-sm transition-all duration-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 ${isDark ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400' : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'}`}
+                    className={`w-full rounded-xl border px-4 py-3 text-sm shadow-sm transition-all duration-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 ${isDark ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400' : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'}`}
                     required
                   />
-              </div>
-              <div className="flex gap-4">
-                <button
-                  type="button"
-                  onClick={() => setIsModalOpen(false)}
-                  className="flex-1 px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
-                >
-                  {loading ? 'Submitting...' : 'Submit'}
-                </button>
-              </div>
-            </form>
+                </div>
+
+                <div className="flex gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setIsModalOpen(false)}
+                    className="flex-1 px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="flex-1 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+                  >
+                    {loading ? 'Submitting...' : 'Submit'}
+                  </button>
+                </div>
+              </form>
+            </div>
           </motion.div>
         </div>
       )}
