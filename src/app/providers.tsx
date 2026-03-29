@@ -2,7 +2,6 @@
 
 import dynamic from "next/dynamic";
 import { useEffect } from 'react';
-import { Toaster } from 'react-hot-toast';
 
 const ThemeProvider = dynamic(() => import("next-themes").then((mod) => mod.ThemeProvider), {
   ssr: false,
@@ -38,19 +37,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <ThemeProvider attribute="class" enableSystem={false} defaultTheme="dark">
       {children}
       <ScrollAnimator />
-      <Toaster
-        toastOptions={{
-          duration: 5000,
-          style: {
-            background: '#111827',
-            color: '#ffffff',
-            border:'1px solid #4a6cf7',
-            borderRadius: '12px',
-            boxShadow: '0 10px 24px rgba(0,0,0,0.28)',
-            fontWeight: 600,
-          },
-        }}
-      />
     </ThemeProvider>
   );
 }

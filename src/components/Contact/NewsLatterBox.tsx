@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import toast from "react-hot-toast";
+import { showError, showSuccess } from "@/lib/alerts";
 import { useTheme } from "next-themes";
 import { subscribeToUpdates } from "@/lib/services";
 
@@ -17,20 +17,20 @@ const NewsLatterBox = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email) {
-      toast.error("Name and email are required");
+      showError("Name and email are required");
       return;
     }
     if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      toast.error("Invalid email");
+      showError("Invalid email");
       return;
     }
     setLoading(true);
     try {
       await subscribeToUpdates(formData.email, formData.name);
-      toast.success("Subscribed successfully!");
+      showSuccess("Subscribed successfully!");
       setFormData({ name: "", email: "" });
     } catch (error) {
-      toast.error("Failed to subscribe");
+      showError("Failed to subscribe");
     } finally {
       setLoading(false);
     }

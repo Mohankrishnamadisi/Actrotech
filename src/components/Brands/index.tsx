@@ -3,16 +3,16 @@ import Image from "next/image";
 import brandsData from "./brandsData";
 
 const Brands = () => {
+  const marqueeItems = [...brandsData, ...brandsData];
+
   return (
     <section className="pt-16">
       <div className="container">
-        <div className="-mx-4 flex flex-wrap">
-          <div className="w-full px-4">
-            <div className="flex flex-wrap items-center justify-center rounded-xs bg-gray-light px-8 py-8 dark:bg-gray-dark sm:px-10 md:px-[50px] md:py-[40px] xl:p-[50px] 2xl:px-[70px] 2xl:py-[60px]">
-              {brandsData.map((brand) => (
-                <SingleBrand key={brand.id} brand={brand} />
-              ))}
-            </div>
+        <div className="-mx-4 overflow-hidden px-4">
+          <div className="flex min-w-max items-center gap-6 py-6 animate-marquee">
+            {marqueeItems.map((brand, index) => (
+              <SingleBrand key={`${brand.id}-${index}`} brand={brand} />
+            ))}
           </div>
         </div>
       </div>
@@ -26,15 +26,18 @@ const SingleBrand = ({ brand }: { brand: Brand }) => {
   const { href, image, imageLight, name } = brand;
 
   return (
-    <div className="flex w-1/2 items-center justify-center px-3 py-[15px] sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6">
+    <div className="flex w-1/2 items-center justify-center px-2 py-3 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6">
       <a
         href={href}
         target="_blank"
         rel="nofollow noreferrer"
-        className="relative h-10 w-full opacity-70 transition hover:opacity-100 dark:opacity-60 dark:hover:opacity-100"
+        className="group relative h-16 w-full overflow-hidden rounded-xl border border-slate-200 bg-white/75 p-2 shadow-sm transition duration-300 ease-in-out hover:border-primary hover:bg-white hover:shadow-lg dark:border-slate-700 dark:bg-slate-900/70 dark:hover:bg-slate-800"
       >
-        <Image src={imageLight} alt={name} fill className="hidden dark:block" />
-        <Image src={image} alt={name} fill className="block dark:hidden" />
+        <div className="absolute inset-0 pointer-events-none bg-black/10 transition duration-300 group-hover:bg-transparent" />
+        <div className="relative h-full w-full opacity-70 transition duration-300 group-hover:opacity-100 group-hover:scale-105">
+          <Image src={imageLight} alt={name} fill className="hidden dark:block object-contain" />
+          <Image src={image} alt={name} fill className="block dark:hidden object-contain" />
+        </div>
       </a>
     </div>
   );

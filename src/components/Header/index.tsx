@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { supabase } from "@/lib/supabaseClient";
+import { LogOut } from "lucide-react";
 import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
 
@@ -194,9 +195,10 @@ const Header = () => {
                     </span>
                     <button
                       onClick={handleLogout}
-                      className="mr-4 rounded-lg border border-red-500 px-4 py-2 text-sm font-medium text-red-500 hover:bg-red-500 hover:text-white"
+                      className="mr-4 inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:border-slate-400 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
                     >
-                      Logout
+                      <LogOut className="h-4 w-4 transition-transform duration-200 hover:translate-x-1" />
+                      <span>Logout</span>
                     </button>
                   </>
                 ) : (

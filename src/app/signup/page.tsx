@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
+import { showError, showSuccess } from "@/lib/alerts";
 import { supabase } from "@/lib/supabaseClient";
 
 const SignupPage = () => {
@@ -18,7 +18,7 @@ const SignupPage = () => {
     e.preventDefault();
 
     if (!displayName || !phone || !email || !password) {
-      toast.error("All fields are required.");
+      showError("All fields are required.");
       return;
     }
 
@@ -36,9 +36,9 @@ const SignupPage = () => {
     });
 
     if (error) {
-      toast.error(error.message);
+      showError(error.message);
     } else {
-      toast.success("Signup successful! Please sign in.");
+      showSuccess("Signup successful! Please sign in.");
       setDisplayName("");
       setPhone("");
       setEmail("");

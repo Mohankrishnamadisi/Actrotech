@@ -3,9 +3,9 @@
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import toast from 'react-hot-toast';
 import { motion } from "framer-motion";
 import { supabase } from '@/lib/supabaseClient';
+import { showSuccess, showError, confirmCareerNote } from '@/lib/alerts';
 import {
   Users,
   Rocket,
@@ -184,8 +184,12 @@ export default function CareersPage() {
   const totalPages = Math.max(1, Math.ceil(filteredJobs.length / jobsPerPage));
   const currentJobs = filteredJobs.slice((currentPage - 1) * jobsPerPage, currentPage * jobsPerPage);
 
-  const handleApplyClick = () => {
-    setIsModalOpen(true);
+  const handleApplyClick = async () => {
+    const message = "Note: This position is offered through a third-party payroll company. The selected candidate will be deployed to work on projects with a leading MNC client.";
+    const result = await confirmCareerNote(message);
+    if (result.isConfirmed) {
+      setIsModalOpen(true);
+    }
   };
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -196,12 +200,12 @@ export default function CareersPage() {
     e.preventDefault();
 
     if (!applicationForm.name || !applicationForm.email || !applicationForm.phone || !applicationForm.role) {
-      toast.error('All fields are required');
+      showError('All fields are required');
       return;
     }
 
     if (!resumeFile) {
-      toast.error('Resume file is required');
+      showError('Resume file is required');
       return;
     }
 
@@ -211,22 +215,39 @@ export default function CareersPage() {
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     ];
     if (!allowedTypes.includes(resumeFile.type)) {
-      toast.error('Resume must be PDF, DOC, or DOCX');
+      showError('Resume must be PDF, DOC, or DOCX');
       return;
     }
 
     const maxSize = 5 * 1024 * 1024; // 5MB
     if (resumeFile.size > maxSize) {
-      toast.error('Resume must be less than 5MB');
+      showError('Resume must be less than 5MB');
       return;
     }
 
     if (!/\S+@\S+\.\S+/.test(applicationForm.email)) {
-      toast.error('Invalid email');
+      showError('Invalid email');
       return;
     }
     if (!/^\d{10}$/.test(applicationForm.phone)) {
-      toast.error('Invalid phone number (10 digits)');
+      showError('Invalid phone number (10 digits)');
+      return;
+    }
+
+    const { data: existingApplications, error: existingError } = await supabase
+      .from('job_applications')
+      .select('id')
+      .or(`email.eq.${applicationForm.email},phone.eq.${applicationForm.phone}`)
+      .limit(1);
+
+    if (existingError) {
+      console.error('Error checking duplicate application:', existingError);
+      showError('Unable to verify application status. Please try again later.');
+      return;
+    }
+
+    if (existingApplications && existingApplications.length > 0) {
+      showError('You have already applied for this job');
       return;
     }
 
@@ -269,13 +290,13 @@ export default function CareersPage() {
       console.log('Job application DB insert start', { name: applicationForm.name, email: applicationForm.email, role: applicationForm.role, phone: applicationForm.phone, resumeUrl });
       await applyForJob(applicationForm.name, applicationForm.email, applicationForm.phone, applicationForm.role, resumeUrl);
       console.log('Job application DB insert success');
-      toast.success('Application submitted successfully!');
+      showSuccess('Application submitted successfully!');
 
       setApplicationForm({ name: '', email: '', phone: '', role: '', resume_url: '' });
       setResumeFile(null);
       setIsModalOpen(false);
     } catch (error) {
-      toast.error('Failed to submit application');
+      showError('Failed to submit application');
     } finally {
       setLoading(false);
     }
@@ -409,7 +430,16 @@ export default function CareersPage() {
               <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
               New Openings
             </h3>
-            <h5 className="font-bold mb-8 text-center flex items-center justify-center">Note: This position is offered through a third-party payroll company. The selected candidate will be deployed to work on projects with a leading MNC client</h5>
+            <div className="mx-auto mb-8 max-w-3xl rounded-xl border border-blue-200 bg-blue-50/70 p-5 text-center leading-relaxed shadow-xl dark:border-blue-900 dark:bg-blue-950/30">
+              <div className="flex items-center justify-center gap-3 text-sm font-semibold text-blue-700 dark:text-blue-300">
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-blue-200/80 text-blue-700 dark:bg-blue-600/30 dark:text-blue-200">
+                  <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M12 20c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z" />
+                  </svg>
+                </span>
+                <span>Important: Third-party payroll role; deployment on MNC client projects.</span>
+              </div>
+            </div>
 
             {jobsLoading ? (
               <div className="rounded-3xl border border-dashed border-gray-300 bg-white/70 px-8 py-16 text-center text-gray-600 dark:border-gray-700 dark:bg-gray-900/70 dark:text-gray-300">
@@ -661,73 +691,76 @@ export default function CareersPage() {
 
       {/* Job Application Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.3 }}
-            className={`p-8 rounded-lg shadow-2xl max-w-md w-full mx-4 ${isDark ? 'bg-gray-800' : 'bg-white'}`}
-            style={{ maxHeight: '85vh', overflowY: 'auto' }}
+            initial={{ opacity: 0, scale: 0.96, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.96, y: 20 }}
+            transition={{ duration: 0.35 }}
+            className={`relative overflow-hidden rounded-2xl border border-white/20 shadow-2xl shadow-black/25 w-full max-w-lg ${isDark ? 'bg-slate-900/90' : 'bg-white/95'}`}
+            style={{ maxHeight: '88vh', overflowY: 'auto' }}
           >
-            <h3 className="text-2xl font-bold mb-6 text-center">Apply for Job</h3>
-            <form onSubmit={handleFormSubmit}>
-              <div className="mb-4">
-                <label className="block text-sm font-medium mb-2">Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={applicationForm.name}
-                  onChange={handleFormChange}
-                  className={`w-full px-3 py-2 border rounded ${isDark ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-sm font-medium mb-2">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={applicationForm.email}
-                  onChange={handleFormChange}
-                  className={`w-full px-3 py-2 border rounded ${isDark ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-sm font-medium mb-2">Phone</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={applicationForm.phone}
-                  onChange={handleFormChange}
-                  className={`w-full px-3 py-2 border rounded ${isDark ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-sm font-medium mb-2">Role</label>
-                <input
-                  type="text"
-                  name="role"
-                  value={applicationForm.role}
-                  onChange={handleFormChange}
-                  className={`w-full px-3 py-2 border rounded ${isDark ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}
-                  required
-                />
-              </div>
-              <div className="mb-6">
-                <label className="block text-sm font-medium mb-2">Resume (PDF/DOC/DOCX)</label>
-                <input
-                  type="file"
-                  accept=".pdf,.doc,.docx"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0] ?? null;
-                    setResumeFile(file);
-                  }}
-                  className={`w-full px-3 py-2 border rounded ${isDark ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}
-                  required
-                />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(74,108,247,0.15),transparent_50%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(0,0,0,0.08))]" />
+            <div className="relative z-10 px-6 py-8 sm:px-10 sm:py-10">
+              <h3 className="text-2xl font-bold mb-6 text-center text-slate-900 dark:text-white">Apply for Job</h3>
+              <form onSubmit={handleFormSubmit}>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-200">Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={applicationForm.name}
+                    onChange={handleFormChange}
+                    className={`w-full rounded-xl border px-4 py-3 text-sm text-slate-900 shadow-sm transition-all duration-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 ${isDark ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400' : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'}`}
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-200">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={applicationForm.email}
+                    onChange={handleFormChange}
+                    className={`w-full rounded-xl border px-4 py-3 text-sm text-slate-900 shadow-sm transition-all duration-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 ${isDark ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400' : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'}`}
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-200">Phone</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={applicationForm.phone}
+                    onChange={handleFormChange}
+                    className={`w-full rounded-xl border px-4 py-3 text-sm text-slate-900 shadow-sm transition-all duration-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 ${isDark ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400' : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'}`}
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-200">Role</label>
+                  <input
+                    type="text"
+                    name="role"
+                    value={applicationForm.role}
+                    onChange={handleFormChange}
+                    className={`w-full rounded-xl border px-4 py-3 text-sm text-slate-900 shadow-sm transition-all duration-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 ${isDark ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400' : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'}`}
+                    required
+                  />
+                </div>
+                <div className="mb-6">
+                  <label className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-200">Resume (PDF/DOC/DOCX)</label>
+                  <input
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0] ?? null;
+                      setResumeFile(file);
+                    }}
+                    className={`w-full rounded-xl border px-4 py-3 text-sm text-slate-900 shadow-sm transition-all duration-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 ${isDark ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400' : 'bg-white border-slate-300 text-slate-800 placeholder-slate-500'}`}
+                    required
+                  />
               </div>
               <div className="flex gap-4">
                 <button

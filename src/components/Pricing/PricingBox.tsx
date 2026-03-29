@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useState } from 'react';
+
 const PricingBox = (props: {
   price: string;
   duration: string;
@@ -6,6 +10,17 @@ const PricingBox = (props: {
   children: React.ReactNode;
 }) => {
   const { price, duration, packageName, subtitle, children } = props;
+  const [snackbarVisible, setSnackbarVisible] = useState(false);
+
+  const handleTrialClick = () => {
+    setSnackbarVisible(true);
+  };
+
+  useEffect(() => {
+    if (!snackbarVisible) return;
+    const timer = setTimeout(() => setSnackbarVisible(false), 3500);
+    return () => clearTimeout(timer);
+  }, [snackbarVisible]);
 
   return (
     <div className="w-full">
@@ -23,9 +38,14 @@ const PricingBox = (props: {
         </div>
         <p className="text-body-color mb-7 text-base">{subtitle}</p>
         <div className="border-body-color/10 mb-8 border-b pb-8 dark:border-white/10">
-          <button className="bg-primary/80 hover:bg-primary/50 hover:shadow-signUp flex w-full items-center justify-center rounded-xs p-3 text-base font-semibold text-white transition duration-300 ease-in-out cursor-pointer">
+          <button onClick={handleTrialClick} className="bg-primary/80 hover:bg-primary/50 hover:shadow-signUp flex w-full items-center justify-center rounded-xs p-3 text-base font-semibold text-white transition duration-300 ease-in-out cursor-pointer">
             Start Free Trial
           </button>
+          {snackbarVisible && (
+            <div className="fixed bottom-5 right-5 z-50 rounded-lg bg-slate-900 text-white px-4 py-2 shadow-xl animate-slide-up">
+              Server is busy, please try again later
+            </div>
+          )}
         </div>
         <div>{children}</div>
         <div className="absolute right-0 bottom-0 z-[-1]">

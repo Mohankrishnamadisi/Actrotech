@@ -1,69 +1,31 @@
 "use client";
 
-import VideoModal from "@/components/video-modal";
-import Image from "next/image";
-import { useState } from "react";
-import SectionTitle from "../Common/SectionTitle";
-
 export default function Video() {
-  const [isOpen, setOpen] = useState(false);
+  const videoId = "nyxi8n6x41w";
+  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&rel=0&showinfo=0&modestbranding=1`;
 
   return (
-    <>
-      <section className="relative z-10 py-16 md:py-20 lg:py-28">
-        <div className="container">
-          <SectionTitle
-            title="We are ready to help"
-            paragraph="There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form."
-            center
-            mb="80px"
-          />
-        </div>
-        <div className="relative overflow-hidden">
-          <div className="-mx-4 flex flex-wrap">
-            <div className="w-full px-4">
-              <div className="mx-auto max-w-[770px] overflow-hidden rounded-md">
-                <div className="relative aspect-77/40 items-center justify-center">
-                  <Image
-                    src="/images/video/image.png"
-                    alt="video image"
-                    className="object-cover"
-                    fill
-                  />
-                  <div className="absolute top-0 right-0 flex h-full w-full items-center justify-center">
-                    <button
-                      aria-label="video play button"
-                      onClick={() => setOpen(true)}
-                      className="text-primary flex h-[70px] w-[70px] items-center justify-center rounded-full bg-white/75 transition hover:bg-white cursor-pointer"
-                    >
-                      <svg
-                        width="16"
-                        height="18"
-                        viewBox="0 0 16 18"
-                        className="fill-current"
-                      >
-                        <path d="M15.5 8.13397C16.1667 8.51888 16.1667 9.48112 15.5 9.86602L2 17.6603C1.33333 18.0452 0.499999 17.564 0.499999 16.7942L0.5 1.20577C0.5 0.43597 1.33333 -0.0451549 2 0.339745L15.5 8.13397Z" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <section className="relative h-[70vh] min-h-[420px] overflow-hidden">
+      <div className="absolute inset-0">
+        <iframe
+          src={embedUrl}
+          title="ActroTech Hero Video"
+          className="h-full w-full object-cover"
+          allow="autoplay; encrypted-media; fullscreen"
+          frameBorder="0"
+          allowFullScreen
+        />
+        <div className="absolute inset-0 bg-black/35" />
+      </div>
 
-          <div className="absolute right-0 bottom-0 left-0 z-[-1] h-full w-full bg-[url(/images/video/shape.svg)] bg-cover bg-center bg-no-repeat">
-            {/* <div className="absolute bottom-0 left-0 right-0 z-[-1] "> */}
-            {/* <img src="/images/video/shape.svg" alt="shape" className="w-full" /> */}
-          </div>
+      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center text-white">
+        <div className="max-w-xl">
+          <h2 className="mb-3 text-3xl font-bold sm:text-4xl">Discover Passionate Tech Talent & Software Excellence</h2>
+          <p className="mb-6 text-base sm:text-lg text-slate-100/90">
+            ActroTech is your partner for next-level product engineering, remote staffing, and digital transformation.
+          </p>
         </div>
-      </section>
-
-      <VideoModal
-        isOpen={isOpen}
-        onClose={() => setOpen(false)}
-        channel="youtube"
-        videoId="pHGw0zkrbzw"
-      />
-    </>
+      </div>
+    </section>
   );
 };

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
+import { showError, showSuccess } from "@/lib/alerts";
 import { supabase } from "@/lib/supabaseClient";
 
 const SigninPage = () => {
@@ -20,9 +20,9 @@ const SigninPage = () => {
       password,
     });
     if (error) {
-      toast.error(error.message);
+      showError(error.message);
     } else {
-      toast.success("Login successful!");
+      showSuccess("Login successful!");
       setEmail("");
       setPassword("");
       router.push("/");

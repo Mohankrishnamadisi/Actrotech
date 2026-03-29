@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import toast from "react-hot-toast";
+import { showError, showSuccess } from "@/lib/alerts";
 import Button from "@/components/Common/Button";
 import NewsLatterBox from "./NewsLatterBox";
 import { sendContactMessage } from "@/lib/services";
@@ -21,20 +21,20 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
-      toast.error("All fields are required");
+      showError("All fields are required");
       return;
     }
     if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      toast.error("Invalid email");
+      showError("Invalid email");
       return;
     }
     setLoading(true);
     try {
       await sendContactMessage(formData.name, formData.email, formData.message);
-      toast.success("Message sent successfully!");
+      showSuccess("Message sent successfully!");
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
-      toast.error("Failed to send message");
+      showError("Failed to send message");
     } finally {
       setLoading(false);
     }
