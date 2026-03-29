@@ -2,26 +2,50 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { supabase } from "@/lib/supabaseClient";
 
 const SignupPage = () => {
+  const router = useRouter();
+  const [displayName, setDisplayName] = useState("");
+  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!displayName || !phone || !email || !password) {
+      toast.error("All fields are required.");
+      return;
+    }
+
     setLoading(true);
+
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          display_name: displayName,
+          phone,
+        },
+      },
     });
+
     if (error) {
       toast.error(error.message);
     } else {
-      toast.success("Signup successful! Check email.");
+      toast.success("Signup successful! Please sign in.");
+      setDisplayName("");
+      setPhone("");
+      setEmail("");
+      setPassword("");
+      router.push("/signin");
     }
+
     setLoading(false);
   };
 
@@ -39,6 +63,38 @@ const SignupPage = () => {
                   It’s totally free and super easy
                 </p>
                 <form onSubmit={handleSignUp}>
+                  <div className="mb-8">
+                    <label
+                      htmlFor="displayName"
+                      className="mb-3 block text-sm font-medium text-dark dark:text-white"
+                    >
+                      Display Name
+                    </label>
+                    <input
+                      type="text"
+                      name="displayName"
+                      value={displayName}
+                      onChange={(e) => setDisplayName(e.target.value)}
+                      placeholder="Enter your Display Name"
+                      className="border-stroke dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B]"
+                    />
+                  </div>
+                  <div className="mb-8">
+                    <label
+                      htmlFor="phone"
+                      className="mb-3 block text-sm font-medium text-dark dark:text-white"
+                    >
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      placeholder="Enter your Phone Number"
+                      className="border-stroke dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B]"
+                    />
+                  </div>
                   <div className="mb-8">
                     <label
                       htmlFor="email"

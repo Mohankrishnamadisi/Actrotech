@@ -2,9 +2,10 @@
 
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { motion } from "framer-motion";
+import { supabase } from '@/lib/supabaseClient';
 import {
   Users,
   Rocket,
@@ -27,7 +28,7 @@ import {
 } from 'lucide-react';
 import Button from '@/components/Common/Button';
 import SectionTitle from '@/components/Common/SectionTitle';
-import { applyForJob } from '@/lib/services';
+import { applyForJob, getJobs } from '@/lib/services';
 
 const whyWorkWithUs = [
   {
@@ -62,162 +63,6 @@ const whyWorkWithUs = [
   },
 ];
 
-const newOpenings = [
-  {
-    title: 'Frontend Developer (React / Next.js)',
-    experience: '2–5 years',
-    location: 'Remote / Hybrid',
-    skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Next.js', 'TypeScript'],
-    isNew: true,
-  },
-  {
-    title: 'Backend Developer (Node.js / Express)',
-    experience: '3–7 years',
-    location: 'Onsite',
-    skills: ['Node.js', 'Express', 'MongoDB', 'REST APIs', 'JWT'],
-    isNew: true,
-  },
-  {
-    title: 'Full Stack Developer (MERN Stack)',
-    experience: '4–8 years',
-    location: 'Onsite',
-    skills: ['React', 'Node.js', 'MongoDB', 'Express', 'Redux'],
-    isNew: true,
-  },
-  {
-    title: 'Angular Developer',
-    experience: '3–6 years',
-    location: 'Onsite',
-    skills: ['Angular', 'TypeScript', 'RxJS', 'NgRx', 'REST APIs'],
-    isNew: true,
-  },
-  {
-    title: 'Java Developer (Spring Boot)',
-    experience: '5–10 years',
-    location: 'Remote / Hybrid',
-    skills: ['Java', 'Spring Boot', 'Microservices', 'Hibernate', 'MySQL'],
-    isNew: true,
-  },
-  {
-    title: '.NET Developer',
-    experience: '4–9 years',
-    location: 'Onsite',
-    skills: ['C#', '.NET Core', 'Web API', 'SQL Server', 'Azure'],
-    isNew: true,
-  },
-  {
-    title: 'DevOps Engineer',
-    experience: '3–8 years',
-    location: 'Onsite',
-    skills: ['Docker', 'Kubernetes', 'CI/CD', 'AWS', 'Terraform'],
-    isNew: true,
-  },
-  {
-    title: 'Cloud Engineer (AWS / Azure)',
-    experience: '5–12 years',
-    location: 'Remote / Hybrid',
-    skills: ['AWS', 'Azure', 'Cloud Architecture', 'Networking', 'Security'],
-    isNew: true,
-  },
-  {
-    title: 'Data Engineer',
-    experience: '4–10 years',
-    location: 'Onsite',
-    skills: ['Python', 'ETL', 'Spark', 'SQL', 'Data Pipelines'],
-    isNew: true,
-  },
-  {
-    title: 'AI/ML Engineer',
-    experience: '3–9 years',
-    location: 'Onsite',
-    skills: ['Python', 'Machine Learning', 'TensorFlow', 'NLP', 'Deep Learning'],
-    isNew: true,
-  },
-  {
-    title: 'QA Automation Engineer',
-    experience: '2–6 years',
-    location: 'Onsite',
-    skills: ['Selenium', 'Cypress', 'JavaScript', 'Test Automation', 'CI/CD'],
-    isNew: true,
-  },
-  {
-    title: 'Mobile App Developer (Flutter / React Native)',
-    experience: '2–7 years',
-    location: 'Onsite',
-    skills: ['Flutter', 'React Native', 'Dart', 'API Integration', 'UI Design'],
-    isNew: true,
-  },
-  {
-    title: 'Backend Developer (Java / Spring Boot)',
-    experience: '6–12 years',
-    location: 'Onsite',
-    skills: ['Java', 'Spring Boot', 'Microservices', 'Kafka', 'PostgreSQL'],
-    isNew: true,
-  },
-  {
-    title: 'Backend Developer (Python / Django)',
-    experience: '3–8 years',
-    location: 'Remote / Hybrid',
-    skills: ['Python', 'Django', 'REST APIs', 'PostgreSQL', 'Redis'],
-    isNew: true,
-  },
-  {
-    title: 'Full Stack Developer (React + Java)',
-    experience: '5–11 years',
-    location: 'Onsite',
-    skills: ['React', 'Java', 'Spring Boot', 'MySQL', 'Docker'],
-    isNew: true,
-  },
-  {
-    title: 'Full Stack Developer (Angular + .NET)',
-    experience: '4–9 years',
-    location: 'Onsite',
-    skills: ['Angular', '.NET Core', 'C#', 'SQL Server', 'Azure'],
-    isNew: true,
-  },
-  {
-    title: 'Backend Developer (Go / Microservices)',
-    experience: '5–13 years',
-    location: 'Remote / Hybrid',
-    skills: ['Golang', 'Microservices', 'gRPC', 'Docker', 'Kubernetes'],
-    isNew: true,
-  },
-  {
-    title: 'Data Engineer (Big Data)',
-    experience: '6–14 years',
-    location: 'Remote / Hybrid',
-    skills: ['Spark', 'Hadoop', 'Kafka', 'Scala', 'Data Pipelines'],
-    isNew: true,
-  },
-  {
-    title: 'Cloud Engineer (AWS DevOps)',
-    experience: '4–10 years',
-    location: 'Onsite',
-    skills: ['AWS', 'CI/CD', 'Terraform', 'Docker', 'Monitoring'],
-    isNew: true,
-  },
-  {
-    title: 'Full Stack Developer (Node.js + React)',
-    experience: '2–6 years',
-    location: 'Remote / Hybrid',
-    skills: ['Node.js', 'React', 'MongoDB', 'Express', 'JWT'],
-    isNew: true,
-  },
-  {
-    title: 'Backend Developer (Ruby on Rails)',
-    experience: '3–9 years',
-    location: 'Remote / Hybrid',
-    skills: ['Ruby', 'Rails', 'PostgreSQL', 'REST APIs', 'Sidekiq'],
-    isNew: true,
-  },
-  {
-    title: 'Data Engineer (Python / ETL)',
-    experience: '2–7 years',
-    location: 'Onsite',
-    skills: ['Python', 'ETL', 'SQL', 'Airflow', 'Data Warehousing'],
-    isNew: true,
-  },
-];
 
 const oldOpenings = [
   { title: 'UI Developer', experience: '2–4 years' },
@@ -269,6 +114,8 @@ export default function CareersPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
+  const [jobs, setJobs] = useState<any[]>([]);
+  const [jobsLoading, setJobsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [applicationForm, setApplicationForm] = useState({
     name: '',
@@ -277,6 +124,7 @@ export default function CareersPage() {
     role: '',
     resume_url: '',
   });
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
 
   const categories = [
@@ -291,21 +139,47 @@ export default function CareersPage() {
     { value: 'mobile', label: 'Mobile' },
   ];
 
-  const matchesSearch = (job: typeof newOpenings[number]) => {
+  useEffect(() => {
+    const fetchJobs = async () => {
+      setJobsLoading(true);
+      try {
+        const jobsFromDb = await getJobs();
+        const normalizedJobs = (jobsFromDb || []).map((job: any) => ({
+          id: job.id,
+          title: job.title,
+          experience: job.experience,
+          location: job.location,
+          skills: Array.isArray(job.skills) ? job.skills : [],
+          isNew: job.is_new || false,
+          created_at: job.created_at,
+        }));
+        setJobs(normalizedJobs);
+      } catch (error) {
+        console.error('Failed to fetch jobs from Supabase:', error);
+        setJobs([]);
+      } finally {
+        setJobsLoading(false);
+      }
+    };
+
+    fetchJobs();
+  }, []);
+
+  const matchesSearch = (job: any) => {
     const normalized = searchTerm.toLowerCase();
     return (
-      job.title.toLowerCase().includes(normalized) ||
-      job.location.toLowerCase().includes(normalized) ||
-      job.skills.some(skill => skill.toLowerCase().includes(normalized))
+      job.title?.toLowerCase().includes(normalized) ||
+      job.location?.toLowerCase().includes(normalized) ||
+      (Array.isArray(job.skills) && job.skills.some((skill: string) => skill.toLowerCase().includes(normalized)))
     );
   };
 
-  const matchesFilter = (job: typeof newOpenings[number]) => {
+  const matchesFilter = (job: any) => {
     if (filterType === 'all') return true;
-    return job.title.toLowerCase().includes(filterType.toLowerCase());
+    return job.title?.toLowerCase().includes(filterType.toLowerCase());
   };
 
-  const filteredJobs = newOpenings.filter(job => matchesSearch(job) && matchesFilter(job));
+  const filteredJobs = jobs.filter(job => matchesSearch(job) && matchesFilter(job));
   const jobsPerPage = 6;
   const totalPages = Math.max(1, Math.ceil(filteredJobs.length / jobsPerPage));
   const currentJobs = filteredJobs.slice((currentPage - 1) * jobsPerPage, currentPage * jobsPerPage);
@@ -320,10 +194,33 @@ export default function CareersPage() {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!applicationForm.name || !applicationForm.email || !applicationForm.phone || !applicationForm.role || !applicationForm.resume_url) {
+
+    if (!applicationForm.name || !applicationForm.email || !applicationForm.phone || !applicationForm.role) {
       toast.error('All fields are required');
       return;
     }
+
+    if (!resumeFile) {
+      toast.error('Resume file is required');
+      return;
+    }
+
+    const allowedTypes = [
+      'application/pdf',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    ];
+    if (!allowedTypes.includes(resumeFile.type)) {
+      toast.error('Resume must be PDF, DOC, or DOCX');
+      return;
+    }
+
+    const maxSize = 5 * 1024 * 1024; // 5MB
+    if (resumeFile.size > maxSize) {
+      toast.error('Resume must be less than 5MB');
+      return;
+    }
+
     if (!/\S+@\S+\.\S+/.test(applicationForm.email)) {
       toast.error('Invalid email');
       return;
@@ -332,11 +229,50 @@ export default function CareersPage() {
       toast.error('Invalid phone number (10 digits)');
       return;
     }
+
     setLoading(true);
+
     try {
-      await applyForJob(applicationForm.name, applicationForm.email, applicationForm.phone, applicationForm.role, applicationForm.resume_url);
+      const ext = resumeFile.name.split('.').pop() || 'pdf';
+      const fileName = `${Date.now()}-${crypto.randomUUID()}.${ext}`;
+      const filePath = `${fileName}`; // no bucket prefix
+      console.log('Resume upload start', { fileName, filePath, type: resumeFile.type, size: resumeFile.size });
+
+      const { error: uploadError } = await supabase.storage.from('resumes').upload(filePath, resumeFile, {
+        contentType: resumeFile.type,
+      });
+
+      if (uploadError) {
+        console.error('Resume upload failed', uploadError);
+        toast.error('Resume upload failed. Please try again.');
+        return;
+      }
+
+      console.log('Resume uploaded successfully', { filePath });
+
+      const { data: publicData } = await supabase.storage.from('resumes').getPublicUrl(filePath);
+      if (!publicData?.publicUrl) {
+        console.error('Failed to get public URL', publicData);
+        toast.error('Could not generate resume URL. Please try again.');
+        return;
+      }
+
+      const resumeUrl = publicData.publicUrl;
+      if (!resumeUrl) {
+        console.error('Could not get public URL from storage', publicData);
+        toast.error('Could not generate resume URL. Please try again.');
+        return;
+      }
+
+      console.log('Got resume public URL', { resumeUrl });
+
+      console.log('Job application DB insert start', { name: applicationForm.name, email: applicationForm.email, role: applicationForm.role, phone: applicationForm.phone, resumeUrl });
+      await applyForJob(applicationForm.name, applicationForm.email, applicationForm.phone, applicationForm.role, resumeUrl);
+      console.log('Job application DB insert success');
       toast.success('Application submitted successfully!');
+
       setApplicationForm({ name: '', email: '', phone: '', role: '', resume_url: '' });
+      setResumeFile(null);
       setIsModalOpen(false);
     } catch (error) {
       toast.error('Failed to submit application');
@@ -469,12 +405,20 @@ export default function CareersPage() {
             </div>
           {/* New Openings */}
           <div className="mb-16">
-            <h3 className="text-2xl font-bold mb-8 text-center flex items-center justify-center gap-2">
+            <h3 className="text-2xl font-bold mb-3 text-center flex items-center justify-center gap-2">
               <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
               New Openings
             </h3>
+            <h5 className="font-bold mb-8 text-center flex items-center justify-center">Note: This position is offered through a third-party payroll company. The selected candidate will be deployed to work on projects with a leading MNC client</h5>
 
-            {currentJobs.length === 0 ? (
+            {jobsLoading ? (
+              <div className="rounded-3xl border border-dashed border-gray-300 bg-white/70 px-8 py-16 text-center text-gray-600 dark:border-gray-700 dark:bg-gray-900/70 dark:text-gray-300">
+                <p className="text-xl font-semibold mb-2">Loading jobs...</p>
+                <p className="max-w-xl mx-auto text-sm leading-6">
+                  Please wait while we fetch the latest openings.
+                </p>
+              </div>
+            ) : currentJobs.length === 0 ? (
               <div className="rounded-3xl border border-dashed border-gray-300 bg-white/70 px-8 py-16 text-center text-gray-600 dark:border-gray-700 dark:bg-gray-900/70 dark:text-gray-300">
                 <p className="text-xl font-semibold mb-2">No jobs found</p>
                 <p className="max-w-xl mx-auto text-sm leading-6">
@@ -718,7 +662,14 @@ export default function CareersPage() {
       {/* Job Application Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className={`p-8 rounded-lg shadow-2xl max-w-md w-full mx-4 ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.3 }}
+            className={`p-8 rounded-lg shadow-2xl max-w-md w-full mx-4 ${isDark ? 'bg-gray-800' : 'bg-white'}`}
+            style={{ maxHeight: '85vh', overflowY: 'auto' }}
+          >
             <h3 className="text-2xl font-bold mb-6 text-center">Apply for Job</h3>
             <form onSubmit={handleFormSubmit}>
               <div className="mb-4">
@@ -766,12 +717,14 @@ export default function CareersPage() {
                 />
               </div>
               <div className="mb-6">
-                <label className="block text-sm font-medium mb-2">Resume URL</label>
+                <label className="block text-sm font-medium mb-2">Resume (PDF/DOC/DOCX)</label>
                 <input
-                  type="url"
-                  name="resume_url"
-                  value={applicationForm.resume_url}
-                  onChange={handleFormChange}
+                  type="file"
+                  accept=".pdf,.doc,.docx"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0] ?? null;
+                    setResumeFile(file);
+                  }}
                   className={`w-full px-3 py-2 border rounded ${isDark ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}
                   required
                 />
@@ -793,7 +746,7 @@ export default function CareersPage() {
                 </button>
               </div>
             </form>
-          </div>
+          </motion.div>
         </div>
       )}
     </div>

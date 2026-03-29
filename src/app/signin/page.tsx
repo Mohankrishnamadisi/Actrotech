@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { supabase } from "@/lib/supabaseClient";
 
 const SigninPage = () => {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,7 +23,9 @@ const SigninPage = () => {
       toast.error(error.message);
     } else {
       toast.success("Login successful!");
-      // Redirect or something
+      setEmail("");
+      setPassword("");
+      router.push("/");
     }
     setLoading(false);
   };

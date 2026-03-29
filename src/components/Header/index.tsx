@@ -1,9 +1,10 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
+import { supabase } from "@/lib/supabaseClient";
 import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
 
@@ -40,6 +41,34 @@ const Header = () => {
     } else {
       setOpenIndex(index);
     }
+  };
+
+  const router = useRouter();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    let authSubscription;
+
+    const loadUser = async () => {
+      const { data } = await supabase.auth.getSession();
+      setUser(data?.session?.user ?? null);
+    };
+
+    loadUser();
+
+    authSubscription = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => {
+      authSubscription?.subscription?.unsubscribe?.();
+    };
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+    router.push("/");
   };
 
   const usePathName = usePathname();
@@ -158,18 +187,34 @@ const Header = () => {
                 </nav>
               </div>
               <div className="flex items-center justify-end pr-16 lg:pr-0">
-                <Link
-                  href="/signin"
-                  className="group relative inline-flex rounded-lg border-2 border-primary bg-transparent px-6 py-3 text-base font-semibold text-primary transition-all duration-300 ease-in-out hover:bg-primary hover:text-white dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-white mr-4"
-                >
-                  Sign In
-                </Link>
-                <Link
-                  href="/signup"
-                  className="group relative inline-flex rounded-lg bg-linear-to-r from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0"
-                >
-                  Sign Up
-                </Link>
+                {user ? (
+                  <>
+                    <span className="mr-4 text-sm font-medium text-dark dark:text-white">
+                      {`Hi, ${user.user_metadata?.display_name || user.email}`}
+                    </span>
+                    <button
+                      onClick={handleLogout}
+                      className="mr-4 rounded-lg border border-red-500 px-4 py-2 text-sm font-medium text-red-500 hover:bg-red-500 hover:text-white"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      href="/signin"
+                      className="group relative inline-flex rounded-lg border-2 border-primary bg-transparent px-6 py-3 text-base font-semibold text-primary transition-all duration-300 ease-in-out hover:bg-primary hover:text-white dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-white mr-4"
+                    >
+                      Sign In
+                    </Link>
+                    <Link
+                      href="/signup"
+                      className="group relative inline-flex rounded-lg bg-linear-to-r from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0"
+                    >
+                      Sign Up
+                    </Link>
+                  </>
+                )}
                 <div className="ml-4">
                   <ThemeToggler />
                 </div>

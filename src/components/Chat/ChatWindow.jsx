@@ -44,20 +44,20 @@ export default function ChatWindow({ onClose }) {
   const callSupabaseAI = async message => {
     setIsTyping(true);
     try {
-      const res = await fetch("https://rvqeobhdexknhffnqbmy.supabase.co/functions/v1/bright-action", {
+      const res = await fetch("/api/bright-action", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message }),
       });
 
       const data = await res.json();
-      if (!res.ok || !data?.data?.reply) {
-        throw new Error("No response from Supabase Edge Function");
+      if (!res.ok || !data?.success || !data?.reply) {
+        throw new Error("No response from AI backend");
       }
 
-      addMessage("bot", data.data.reply);
+      addMessage("bot", data.reply);
     } catch (error) {
-      console.error("Supabase Edge Function request failed:", error);
+      console.error("AI request failed:", error);
       addMessage("bot", "Unable to fetch response");
     } finally {
       setIsTyping(false);
