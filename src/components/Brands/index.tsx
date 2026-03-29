@@ -26,17 +26,35 @@ const SingleBrand = ({ brand }: { brand: Brand }) => {
   const { href, image, imageLight, name } = brand;
 
   return (
-    <div className="flex w-1/2 items-center justify-center px-2 py-3 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6">
+    <div className="flex items-center justify-center px-4">
       <a
         href={href}
         target="_blank"
         rel="nofollow noreferrer"
-        className="group relative h-28 w-full overflow-hidden rounded-xl border border-slate-200 bg-white/75 p-4 shadow-sm transition duration-300 ease-in-out hover:border-primary hover:bg-white hover:shadow-lg dark:border-slate-700 dark:bg-slate-900/70 dark:hover:bg-slate-800"
+        className="group flex items-center justify-center 
+                   h-32 md:h-36 lg:h-40 
+                   w-[200px] md:w-[240px] lg:w-[280px]
+                   rounded-2xl border border-slate-200 
+                   bg-white/80 p-6 shadow-md
+                   transition duration-300 ease-in-out 
+                   hover:shadow-xl hover:scale-105
+                   dark:border-slate-700 dark:bg-slate-900/80"
       >
-        <div className="absolute inset-0 pointer-events-none bg-black/10 transition duration-300 group-hover:bg-transparent" />
-        <div className="relative h-full w-full opacity-90 transition duration-300 group-hover:opacity-100 group-hover:scale-110">
-          <Image src={imageLight} alt={name} fill className="hidden dark:block object-contain" />
-          <Image src={image} alt={name} fill className="block dark:hidden object-contain" />
+        <div className="relative w-full h-full flex items-center justify-center">
+          <Image
+            src={imageLight}
+            alt={name}
+            width={180}
+            height={80}
+            className="hidden dark:block object-contain transition duration-300 group-hover:scale-110"
+          />
+          <Image
+            src={image}
+            alt={name}
+            width={180}
+            height={80}
+            className="block dark:hidden object-contain transition duration-300 group-hover:scale-110"
+          />
         </div>
       </a>
     </div>
