@@ -9,7 +9,7 @@ const Brands = () => {
     <section className="pt-16">
       <div className="container">
         <div className="-mx-4 overflow-hidden px-4">
-          <div className="flex min-w-max items-center gap-6 py-6 animate-marquee">
+          <div className="flex min-w-max items-center gap-10 py-8 animate-marquee">
             {marqueeItems.map((brand, index) => (
               <SingleBrand key={`${brand.id}-${index}`} brand={brand} />
             ))}
@@ -31,10 +31,10 @@ const SingleBrand = ({ brand }: { brand: Brand }) => {
         href={href}
         target="_blank"
         rel="nofollow noreferrer"
-        className="group relative h-16 w-full overflow-hidden rounded-xl border border-slate-200 bg-white/75 p-2 shadow-sm transition duration-300 ease-in-out hover:border-primary hover:bg-white hover:shadow-lg dark:border-slate-700 dark:bg-slate-900/70 dark:hover:bg-slate-800"
+        className="group relative h-28 w-full overflow-hidden rounded-xl border border-slate-200 bg-white/75 p-4 shadow-sm transition duration-300 ease-in-out hover:border-primary hover:bg-white hover:shadow-lg dark:border-slate-700 dark:bg-slate-900/70 dark:hover:bg-slate-800"
       >
         <div className="absolute inset-0 pointer-events-none bg-black/10 transition duration-300 group-hover:bg-transparent" />
-        <div className="relative h-full w-full opacity-70 transition duration-300 group-hover:opacity-100 group-hover:scale-105">
+        <div className="relative h-full w-full opacity-90 transition duration-300 group-hover:opacity-100 group-hover:scale-110">
           <Image src={imageLight} alt={name} fill className="hidden dark:block object-contain" />
           <Image src={image} alt={name} fill className="block dark:hidden object-contain" />
         </div>
