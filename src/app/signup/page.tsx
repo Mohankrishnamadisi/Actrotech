@@ -3,8 +3,37 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { showError, showSuccess } from "@/lib/alerts";
+import { showError } from "@/lib/alerts";
 import { supabase } from "@/lib/supabaseClient";
+import Swal from "sweetalert2";
+
+const getEmailProviderUrl = (email: string): string => {
+  const normalized = email.trim().toLowerCase();
+
+  if (normalized.includes("@gmail.com")) {
+    return "https://mail.google.com";
+  }
+
+  if (
+    normalized.includes("@outlook.com") ||
+    normalized.includes("@hotmail.com") ||
+    normalized.includes("@live.com") ||
+    normalized.includes("@msn.com")
+  ) {
+    return "https://outlook.live.com/mail";
+  }
+
+  if (normalized.includes("@yahoo.com") || normalized.includes("@ymail.com")) {
+    return "https://mail.yahoo.com";
+  }
+
+  return "https://mail.google.com";
+};
+
+const openMailProvider = (email: string) => {
+  const url = getEmailProviderUrl(email);
+  window.open(url, "_blank", "noopener,noreferrer");
+};
 
 const SignupPage = () => {
   const router = useRouter();
@@ -37,15 +66,35 @@ const SignupPage = () => {
 
     if (error) {
       showError(error.message);
-    } else {
-      showSuccess("Signup successful! Please sign in.");
-      setDisplayName("");
-      setPhone("");
-      setEmail("");
-      setPassword("");
-      router.push("/signin");
+      setLoading(false);
+      return;
     }
 
+    const result = await Swal.fire({
+      icon: "success",
+      title: "Verify Your Email 📩",
+      html: `A verification link has been sent to <strong>${email}</strong>.<br/>Please verify your email before signing in.<br/><small>If you don’t see the email, check your spam folder.</small>`,
+      showCancelButton: true,
+      confirmButtonText: "Open Mail",
+      cancelButtonText: "Go to Sign In",
+      focusConfirm: true,
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      customClass: {
+        popup: "swal2-popup",
+      },
+    });
+
+    if (result.isConfirmed) {
+      openMailProvider(email);
+    }
+
+    setDisplayName("");
+    setPhone("");
+    setEmail("");
+    setPassword("");
+
+    router.push("/signin");
     setLoading(false);
   };
 
