@@ -866,8 +866,8 @@ export default function CareersPage() {
             >
               ✕
             </button>
-            <h3 className="text-2xl font-bold mb-3 text-center text-slate-900 dark:text-white">Join Actrotech Community 🚀</h3>
-            <p className="text-sm text-slate-600 dark:text-slate-300 mb-5 text-center">Stay connected with us on social media and be first to know about new roles.</p>
+            <h3 className="text-2xl font-bold mb-3 text-center text-slate-900 dark:text-white">🚀 Get Job Alerts Before Everyone Else</h3>
+            <p className="text-sm text-slate-600 dark:text-slate-300 mb-5 text-center">Follow us to get instant job notifications and apply before others. Early applicants have better chances of getting shortlisted</p>
             <div className="flex flex-col gap-3">
                  <button
                 onClick={() => openSocialLink('https://www.facebook.com/people/Actrotech-Solutions-Pvt-Ltd/61578411107498/')}
@@ -875,7 +875,7 @@ export default function CareersPage() {
               >
                 <Facebook className="w-4 h-4" /> Facebook
               </button>
-              
+
               <button
                 onClick={() => openSocialLink('https://www.instagram.com/actrotech_solutions/')}
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-pink-500 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:scale-105 hover:bg-pink-600"
