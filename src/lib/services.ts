@@ -30,7 +30,7 @@ export const applyForJob = async (name: string, email: string, phone: string, ro
 export const getJobs = async () => {
   const { data, error } = await supabase
     .from('jobs')
-    .select('id, title, experience, location, skills, is_new, created_at')
+    .select('id, title, experience, location, skills, is_new, Applicants, created_at')
     .order('created_at', { ascending: false })
 
   if (error) {

@@ -24,7 +24,10 @@ import {
   ArrowRight,
   Filter,
   Briefcase,
-  Star,
+  Star,  
+  Facebook,
+  Linkedin,
+  Instagram,
 } from 'lucide-react';
 import Button from '@/components/Common/Button';
 import SectionTitle from '@/components/Common/SectionTitle';
@@ -117,6 +120,8 @@ export default function CareersPage() {
   const [jobs, setJobs] = useState<any[]>([]);
   const [jobsLoading, setJobsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showSocialFollowSection, setShowSocialFollowSection] = useState(false);
+  const [showSocialModal, setShowSocialModal] = useState(false);
   const [applicationForm, setApplicationForm] = useState({
     name: '',
     email: '',
@@ -124,6 +129,12 @@ export default function CareersPage() {
     role: '',
     resume_url: '',
   });
+
+  const openSocialLink = (url: string) => {
+    if (typeof window !== 'undefined' && url) {
+      window.open(url, '_blank');
+    }
+  };
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -151,6 +162,7 @@ export default function CareersPage() {
           location: job.location,
           skills: Array.isArray(job.skills) ? job.skills : [],
           isNew: job.is_new || false,
+          applicants: Number.isFinite(job.Applicants) ? job.Applicants : 0,
           created_at: job.created_at,
         }));
         setJobs(normalizedJobs);
@@ -291,6 +303,8 @@ export default function CareersPage() {
       await applyForJob(applicationForm.name, applicationForm.email, applicationForm.phone, applicationForm.role, resumeUrl);
       console.log('Job application DB insert success');
       showSuccess('Application submitted successfully!');
+      setShowSocialFollowSection(true);
+      setShowSocialModal(true);
 
       setApplicationForm({ name: '', email: '', phone: '', role: '', resume_url: '' });
       setResumeFile(null);
@@ -325,9 +339,6 @@ export default function CareersPage() {
   }}className="group relative flex rounded-lg bg-linear-to-r from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0 items-center gap-2 cursor-pointer">
                 View Open Positions <ArrowRight size={20} />
               </button>
-              <button className="group relative flex rounded-lg border-2 cursor-pointer border-primary bg-transparent px-6 py-3 text-base font-semibold text-primary transition-all duration-300 ease-in-out hover:bg-primary hover:text-white dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-white" onClick={handleApplyClick}>
-                Apply Now
-              </button>
             </div>
           </div>
           <div className="flex justify-center">
@@ -341,6 +352,50 @@ export default function CareersPage() {
           </div>
         </div>
       </section>
+
+      {showSocialFollowSection && (
+        <section className="py-12 lg:py-16 bg-blue-50 dark:bg-slate-900">
+          <div className="container mx-auto px-4">
+            <div className="mx-auto max-w-3xl rounded-2xl border border-blue-200 bg-white p-6 shadow-xl dark:border-gray-700 dark:bg-slate-800">
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="text-center"
+              >
+                <h2 className="text-3xl font-bold mb-2 text-slate-900 dark:text-white">Application Submitted Successfully 🎉</h2>
+                <p className="text-sm text-slate-600 dark:text-slate-300 mb-6">Thank you for applying. We’ll be in touch soon.</p>
+                <div className="mb-8">
+                  <h3 className="text-xl font-semibold mb-2">🚀 Stay Ahead – Get Job Updates Instantly</h3>
+                  <p className="text-sm text-slate-600 dark:text-slate-300">Follow Actrotech to get instant job alerts and apply early to increase your chances.</p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center mb-3">                  
+                  <button
+                    onClick={() => openSocialLink('https://www.facebook.com/people/Actrotech-Solutions-Pvt-Ltd/61578411107498/')}
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-blue-500 bg-blue-700 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:scale-105 hover:bg-blue-800"
+                  >
+                    <Facebook className="w-4 h-4" /> Facebook
+                  </button>
+                  <button
+                    onClick={() => openSocialLink('https://www.instagram.com/actrotech_solutions/')}
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-pink-400 bg-pink-500 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:scale-105 hover:bg-pink-600"
+                  >
+                    <Instagram className="w-4 h-4" /> Instagram
+                  </button>
+                  
+                  <button
+                    onClick={() => openSocialLink('https://www.linkedin.com/company/112563284')}
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-blue-400 bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:scale-105 hover:bg-blue-700"
+                  >
+                    <Linkedin className="w-4 h-4" /> LinkedIn
+                  </button>
+                </div>
+                <p className="text-xs text-slate-500 dark:text-slate-400">Most jobs get filled quickly – don’t miss out ⏳</p>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Why Work With Us */}
       <section className="py-16 lg:py-24">
@@ -468,8 +523,13 @@ export default function CareersPage() {
                       }`}
                     >
                       <div className="flex items-start justify-between mb-4">
-                        <div className={`p-2 rounded-lg ${isDark ? 'bg-green-600/20' : 'bg-green-100'}`}>
-                          <Briefcase className={`w-6 h-6 ${isDark ? 'text-green-400' : 'text-green-600'}`} />
+                        <div className="flex items-center gap-2">
+                          <div className={`p-2 rounded-lg ${isDark ? 'bg-green-600/20' : 'bg-green-100'}`}>
+                            <Briefcase className={`w-6 h-6 ${isDark ? 'text-green-400' : 'text-green-600'}`} />
+                          </div>
+                          <span className="rounded-full bg-blue-100 px-2 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-900/70 dark:text-blue-200">
+                            Applicants: {job.applicants ?? 0}+
+                          </span>
                         </div>
                         {job.isNew && (
                           <span className="bg-green-500 text-white text-xs px-2 py-1 rounded-full font-medium">
@@ -785,6 +845,52 @@ export default function CareersPage() {
                 </div>
               </form>
             </div>
+          </motion.div>
+        </div>
+      )}
+
+      {/* Social Follow Modal (optional) */}
+      {showSocialModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.3 }}
+            className="relative w-full max-w-md rounded-2xl border border-white/20 bg-white p-6 shadow-2xl dark:border-gray-700 dark:bg-slate-900"
+          >
+            <button
+              onClick={() => setShowSocialModal(false)}
+              className="absolute right-3 top-3 text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+              aria-label="Close"
+            >
+              ✕
+            </button>
+            <h3 className="text-2xl font-bold mb-3 text-center text-slate-900 dark:text-white">Join Actrotech Community 🚀</h3>
+            <p className="text-sm text-slate-600 dark:text-slate-300 mb-5 text-center">Stay connected with us on social media and be first to know about new roles.</p>
+            <div className="flex flex-col gap-3">
+                 <button
+                onClick={() => openSocialLink('https://www.facebook.com/people/Actrotech-Solutions-Pvt-Ltd/61578411107498/')}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-700 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:scale-105 hover:bg-blue-800"
+              >
+                <Facebook className="w-4 h-4" /> Facebook
+              </button>
+              
+              <button
+                onClick={() => openSocialLink('https://www.instagram.com/actrotech_solutions/')}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-pink-500 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:scale-105 hover:bg-pink-600"
+              >
+                <Instagram className="w-4 h-4" /> Instagram
+              </button>
+           
+              <button
+                onClick={() => openSocialLink('https://www.linkedin.com/company/112563284')}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:scale-105 hover:bg-blue-700"
+              >
+                <Linkedin className="w-4 h-4" /> LinkedIn
+              </button>
+            </div>
+            <p className="mt-4 text-center text-xs text-slate-500 dark:text-slate-400">Most jobs get filled quickly – don’t miss out ⏳</p>
           </motion.div>
         </div>
       )}
