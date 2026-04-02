@@ -43,34 +43,34 @@ import { applyForJob, getJobs } from '@/lib/services';
 
 const whyWorkWithUs = [
   {
+    icon: Rocket,
     title: 'Growth Opportunities',
     description: 'Continuous learning and career advancement paths',
-    animation: 'https://assets5.lottiefiles.com/packages/lf20_SYrS2D7XJF.json',
   },
   {
+    icon: Lightbulb,
     title: 'Innovative Work Environment',
     description: 'Work with cutting-edge technologies and modern tools',
-    animation: 'https://assets2.lottiefiles.com/packages/lf20_BCsx5I.json',
   },
   {
+    icon: HandHeart,
     title: 'Collaborative Culture',
     description: 'Supportive team environment that values your input',
-    animation: 'https://assets5.lottiefiles.com/packages/lf20_x4orqxsl.json',
   },
   {
+    icon: Globe,
     title: 'Work on Real-world Projects',
     description: 'Impactful projects that solve real business challenges',
-    animation: 'https://assets5.lottiefiles.com/packages/lf20_v0dm1tqz.json',
   },
   {
+    icon: BookOpen,
     title: 'Continuous Learning',
     description: 'Access to training, conferences, and skill development',
-    animation: 'https://assets10.lottiefiles.com/packages/lf20_At7fdF.json',
   },
   {
+    icon: Coffee,
     title: 'Work-Life Balance',
     description: 'Flexible hours and remote work options available',
-    animation: 'https://assets3.lottiefiles.com/packages/lf20_2km6x38x.json',
   },
 ];
 
@@ -422,8 +422,8 @@ export default function CareersPage() {
             <motion.div
               className="flex justify-center"
               animate={{
-                x: (mousePos.x - 0.5) * 18,
-                y: (mousePos.y - 0.5) * 12,
+                x: (mousePos.x - 0.5) * 16,
+                y: (mousePos.y - 0.5) * 10,
               }}
               transition={{ type: 'spring', stiffness: 120, damping: 18 }}
             >
@@ -433,7 +433,7 @@ export default function CareersPage() {
                 muted
                 loop
                 playsInline
-                className="w-full max-w-md rounded-xl border border-blue-200 shadow-2xl object-cover"
+                className="w-full max-w-2xl h-[520px] md:h-[520px] lg:h-[540px] rounded-xl border border-blue-200 shadow-2xl object-cover"
               />
             </motion.div>
           </div>
@@ -502,19 +502,12 @@ export default function CareersPage() {
                     : 'bg-white border border-gray-200 hover:bg-gray-50 hover:border-blue-300 shadow-lg'
                 }`}
               >
-                <div className="flex items-center mb-4 justify-center">
-                  <div className="w-16 h-16">
-                    {React.createElement('lottie-player', {
-                      src: item.animation,
-                      background: 'transparent',
-                      speed: '1',
-                      loop: true,
-                      autoplay: true,
-                      class: 'w-full h-full hover:scale-110 transition-transform duration-300',
-                    })}
+                <div className="flex items-center mb-4">
+                  <div className={`p-3 rounded-lg ${isDark ? 'bg-blue-600/20' : 'bg-blue-100'}`}>
+                    <item.icon className={`w-8 h-8 ${isDark ? 'text-blue-400' : 'text-blue-600'}`} />
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 drop-shadow-lg">{item.title}</h3>
+                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
                 <p className="text-gray-600 dark:text-gray-400">{item.description}</p>
               </div>
             ))}
