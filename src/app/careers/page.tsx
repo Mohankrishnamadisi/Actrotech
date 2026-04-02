@@ -110,6 +110,13 @@ const benefits = [
   'Performance Bonuses',
 ];
 
+const cultureHighlights = [
+  { title: 'Hybrid Collaboration Labs', caption: 'Design thinking sessions and product sprints', image: '/images/new/ui-light.png' },
+  { title: 'Wellness & Growth', caption: 'Mentorship, skill tracks and peer coaching', image: '/images/new/ui-dark.png' },
+  { title: 'Global Team Stories', caption: 'Cross-continent squads building next-gen products', image: '/images/new/web-light.png' },
+  { title: 'Innovation Week', caption: 'Hackathons and Creator Days every quarter', image: '/images/new/backend-light.png' },
+];
+
 export default function CareersPage() {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
@@ -129,6 +136,38 @@ export default function CareersPage() {
     role: '',
     resume_url: '',
   });
+
+  const highlightPhrases = ['Innovative teams', 'Remote-friendly culture', 'Impact at scale', 'Fast career growth', 'Collaborative environment'];
+  const [activePhraseIndex, setActivePhraseIndex] = useState(0);
+  const [typedText, setTypedText] = useState('');
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
+
+  useEffect(() => {
+    let idx = 0;
+    const writeType = () => {
+      const phrase = highlightPhrases[activePhraseIndex];
+      if (idx <= phrase.length) {
+        setTypedText(phrase.slice(0, idx));
+        idx += 1;
+      } else {
+        clearInterval(typeInterval);
+        setTimeout(() => {
+          setActivePhraseIndex((prev) => (prev + 1) % highlightPhrases.length);
+        }, 1400);
+      }
+    };
+
+    const typeInterval = setInterval(writeType, 80);
+    return () => clearInterval(typeInterval);
+  }, [activePhraseIndex]);
+
+  const handleHeroMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePos({
+      x: (e.clientX - rect.left) / rect.width,
+      y: (e.clientY - rect.top) / rect.height,
+    });
+  };
 
   const openSocialLink = (url: string) => {
     if (typeof window !== 'undefined' && url) {
@@ -195,6 +234,7 @@ export default function CareersPage() {
   const jobsPerPage = 6;
   const totalPages = Math.max(1, Math.ceil(filteredJobs.length / jobsPerPage));
   const currentJobs = filteredJobs.slice((currentPage - 1) * jobsPerPage, currentPage * jobsPerPage);
+  const galleryDragWidth = Math.max(0, (filteredJobs.length - 3) * 340);
 
   const handleApplyClick = async () => {
     const message = "Note: This position is offered through a third-party payroll company. The selected candidate will be deployed to work on projects with a leading MNC client.";
@@ -319,38 +359,71 @@ export default function CareersPage() {
   return (
     <div className={`mt-8 min-h-screen ${isDark ? 'bg-[#0B1120] text-white' : 'bg-white text-gray-900'}`}>
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-16 lg:py-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h1 className="mb-4 text-3xl font-bold leading-tight! text-black dark:text-white sm:text-4xl md:text-[45px]">
-              Join Our Team at ActroTech
-            </h1>
-            <p className="text-base leading-relaxed! text-body-color md:text-lg mb-4">
-              "Build your career with a team that values innovation, growth, and excellence."
-            </p>
-            <p className="text-base leading-relaxed! text-body-color md:text-lg mb-8">
-              We are always looking for passionate developers, designers, and problem-solvers to join our growing team.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button onClick={() => {
-    document.getElementById("openings")?.scrollIntoView({
-      behavior: "smooth",
-    });
-  }}className="group relative flex rounded-lg bg-linear-to-r from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0 items-center gap-2 cursor-pointer">
-                View Open Positions <ArrowRight size={20} />
-              </button>
+      <section onMouseMove={handleHeroMouseMove} className="container mx-auto px-4 py-16 lg:py-24">
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <motion.h1
+                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.75 }}
+                className="mb-4 text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl md:text-[45px]"
+              >
+                Join Our Team at ActroTech
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+                className="text-base leading-relaxed text-body-color md:text-lg mb-4"
+              >
+                "Build your career with a team that values innovation, growth, and excellence."
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.35, duration: 0.6 }}
+                className="mb-8"
+              >
+                <p className="text-sm text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-2">
+                  {typedText}
+                  <span className="inline-block animate-pulse">|</span>
+                </p>
+                <p className="text-base leading-relaxed text-body-color md:text-lg">
+                  We are always looking for passionate developers, designers, and problem-solvers to join our growing team.
+                </p>
+              </motion.div>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <motion.button
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => {
+                    document.getElementById('openings')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="group relative flex rounded-lg bg-linear-to-r from-primary to-primary/80 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/70 hover:-translate-y-1 active:translate-y-0 items-center gap-2 cursor-pointer"
+                >
+                  View Open Positions <ArrowRight size={20} />
+                </motion.button>
+              </div>
             </div>
+            <motion.div
+              className="flex justify-center"
+              animate={{
+                x: (mousePos.x - 0.5) * 18,
+                y: (mousePos.y - 0.5) * 12,
+              }}
+              transition={{ type: 'spring', stiffness: 120, damping: 18 }}
+            >
+              <Image
+                src={careerImage}
+                alt="Join ActroTech Team"
+                width={520}
+                height={420}
+                className="w-full max-w-md rounded-xl border border-blue-200 shadow-2xl"
+              />
+            </motion.div>
           </div>
-          <div className="flex justify-center">
-            <Image
-              src={careerImage}
-              alt="Join ActroTech Team"
-              width={500}
-              height={400}
-              className="w-full max-w-md rounded-lg shadow-2xl"
-            />
-          </div>
-        </div>
+        </motion.div>
       </section>
 
       {showSocialFollowSection && (
@@ -428,6 +501,52 @@ export default function CareersPage() {
         </div>
       </section>
 
+      {/* Culture Highlights Carousel */}
+      <section className="py-16 lg:py-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+        <div className="container mx-auto px-4">
+          <SectionTitle
+            title="Inside ActroTech Culture"
+            paragraph="Swipe through real team moments, innovation workshops, and life at ActroTech."
+            center
+          />
+          <motion.div
+            className="mt-10 overflow-hidden"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45 }}
+          >
+            <motion.div
+              className="flex gap-6 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide"
+              drag="x"
+              dragConstraints={{ left: -Math.max(0, (cultureHighlights.length - 1) * 340), right: 0 }}
+              whileTap={{ cursor: 'grabbing' }}
+            >
+              {cultureHighlights.map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  className="snap-start min-w-[320px] max-w-[320px] rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-4 shadow-xl hover:shadow-2xl transition-all duration-300"
+                  whileHover={{ y: -8, scale: 1.02 }}
+                >
+                  <div className="relative h-40 w-full overflow-hidden rounded-xl">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      sizes="(max-width: 768px) 280px, 320px"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="mt-4">
+                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white">{item.title}</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">{item.caption}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Job Openings */}
       <section id="openings" className="py-16 lg:py-24 bg-gray-50 dark:bg-gray-900/50">
         <div className="container mx-auto px-4">
@@ -479,6 +598,38 @@ export default function CareersPage() {
                 </select>
               </div>
             </div>
+          {/* Featured Roles Carousel */}
+          <div className="mb-10">
+            <h3 className="text-2xl font-bold mb-4 text-center">Featured Roles Carousel</h3>
+            <motion.div className="relative overflow-hidden" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
+              <motion.div
+                className="flex gap-4 py-2 cursor-grab"
+                drag="x"
+                dragConstraints={{ left: -galleryDragWidth, right: 0 }}
+              >
+                {filteredJobs.slice(0, Math.max(filteredJobs.length, 6)).map((job, idx) => (
+                  <motion.div
+                    key={`featured-${idx}`}
+                    className="min-w-[260px] max-w-[260px] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-4 shadow-lg hover:shadow-2xl transition-all duration-300"
+                    whileHover={{ scale: 1.02, y: -6 }}
+                  >
+                    <div className="text-sm text-blue-600 dark:text-blue-300 font-semibold mb-2">{job.location ?? 'Remote'}</div>
+                    <h4 className="font-semibold text-lg mb-1 text-gray-900 dark:text-white">{job.title}</h4>
+                    <p className="text-xs text-gray-600 dark:text-gray-300 mb-3">{job.experience || 'Mid to Senior level'}</p>
+                    <div className="flex flex-wrap gap-1 mb-3">
+                      {job.skills.slice(0, 3).map((skill: string, sidx: number) => (
+                        <span key={sidx} className="text-xs px-2 py-1 rounded-lg bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200">{skill}</span>
+                      ))}
+                    </div>
+                    <Button onClick={handleApplyClick} variant="primary" className="text-xs w-full py-2">
+                      Apply Now
+                    </Button>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
+          </div>
+
           {/* New Openings */}
           <div className="mb-16">
             <h3 className="text-2xl font-bold mb-3 text-center flex items-center justify-center gap-2">
@@ -729,7 +880,13 @@ export default function CareersPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 lg:py-24 bg-linear-to-r from-blue-600 to-purple-600">
+      <motion.section
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.55 }}
+        className="py-16 lg:py-24 bg-linear-to-r from-blue-600 to-purple-600"
+      >
         <div className="container mx-auto px-4 text-center">
           <h2 className="mb-4 text-3xl font-bold leading-tight! text-white sm:text-4xl md:text-[45px]">
             Ready to take the next step in your career?
@@ -747,7 +904,7 @@ export default function CareersPage() {
             </button>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Job Application Modal */}
       {isModalOpen && (
